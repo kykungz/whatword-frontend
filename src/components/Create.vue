@@ -15,25 +15,35 @@
            </div>
            <textarea v-model="textArea" class="form-control" rows="20"></textarea>
         </div>
-        <button style="width:100%;" class="btn btn-warning btn-lg">Create</button>
+        <button v-on:click="submit()" style="width:100%;" class="btn btn-warning btn-lg">Create</button>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import customAxios from '@/libraries/customAxios'
 export default {
   data () {
     return {
       textArea: ''
     }
   },
+  methods: {
+    submit: async () => {
+      await customAxios.post('/create', {
+        wordBank: this.wordBank
+      })
+    }
+  },
   computed: {
-    count () {
-      let wordBank = this.textArea.split('\n').filter((word) => {
+    wordBank () {
+      return this.textArea.split('\n').filter((word) => {
         return word.trim() !== ''
       })
-      return wordBank.length
+    },
+    count () {
+      return this.wordBank.length
     }
   }
 }
