@@ -11,15 +11,33 @@
           <h1 class="alert alert-info"> {{roomId}} </h1>
         </div>
       </div>
+      <div class="content">
+        <h5>
+          Remote URL:
+          <router-link :to="{ name: 'Remote', params: {id: roomId}}">
+            {{ remoteURL }}
+          </router-link>
+        </h5>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+import customAxios from '@/libraries/customAxios'
+import { ORIGIN_URL } from '@/libraries/variables'
 export default {
+  mounted () {
+    customAxios.get('/room', {params: {
+      id: this.$route.params.id
+    }}).catch((result) => {
+      this.$router.push({path: '/'})
+    })
+  },
   data () {
     return {
-      roomId: this.$route.params.id
+      roomId: this.$route.params.id,
+      remoteURL: `${ORIGIN_URL}/remote/${this.$route.params.id}`
     }
   }
 }

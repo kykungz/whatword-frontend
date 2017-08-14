@@ -19,7 +19,7 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
   margin-top: 60px;
-  margin-bottom: 60px;
+  /*margin-bottom: 60px;*/
 }
 .content {
   max-width: 500px;
@@ -31,5 +31,9 @@ export default {
 
 .fade-enter, .fade-leave-active {
   opacity: 0
+}
+
+.fullwidth {
+  width: 100%;
 }
 </style>

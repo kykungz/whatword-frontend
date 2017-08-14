@@ -4,6 +4,7 @@ import Home from '@/components/Home'
 import Play from '@/components/Play'
 import Create from '@/components/Create'
 import Dashboard from '@/components/Dashboard'
+import Remote from '@/components/Remote'
 
 Vue.use(Router)
 
@@ -26,9 +27,18 @@ export default new Router({
       component: Create
     },
     {
-      path: '/:id',
+      path: '/dashboard/:id',
       name: 'Dashboard',
       component: Dashboard
+    },
+    {
+      path: '/remote/:id',
+      name: 'Remote',
+      component: Remote
+    },
+    {
+      path: '*',
+      redirect: '/'
     }
   ]
 })

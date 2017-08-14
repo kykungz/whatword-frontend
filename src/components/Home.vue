@@ -7,7 +7,7 @@
         <div class="text-left content form-group">
           <label>Enter Game ID:</label>
           <input class="text-center form-control form-control-lg" style="margin-bottom:10px;" placeholder="GAME ID" required>
-          <button class="btn btn-primary btn-lg" type="submit" style="width:100%;">
+          <button class="btn btn-primary btn-lg fullwidth" type="submit">
             Join
           </button>
         </div>
@@ -17,7 +17,7 @@
       <hr>
       <div class="content">
         <router-link :to="{ name: 'Create' }">
-          <button class="btn btn-warning btn-lg" style="width:100%;">
+          <button class="btn btn-warning btn-lg fullwidth">
             Create New Game
           </button>
         </router-link>

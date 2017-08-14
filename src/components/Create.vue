@@ -1,5 +1,5 @@
 <template lang="html">
-  <div>
+  <div class="create">
     <div class="container">
       <h1 class="text-center">What Word is it ?</h1>
       <hr>
@@ -17,12 +17,12 @@
         </div>
         <div class="form-group">
           <label>Remote Password:</label>
-          <input v-model="password" class="form-control" placeholder="Password" type="password"></textarea>
+          <input v-model="password" class="form-control" placeholder="Password" autocomplete="off" type="password"></input>
         </div>
         <div v-if="error" class="alert alert-warning" role="alert">
           {{ errorMessage }}
         </div>
-        <button v-on:click="submit()" style="width:100%;" class="btn btn-warning btn-lg">Create</button>
+        <button v-on:click="submit()" class="btn btn-warning btn-lg fullwidth">Create</button>
       </div>
     </div>
   </div>
@@ -77,4 +77,7 @@ export default {
 </script>
 
 <style scoped>
+.create {
+  margin-bottom: 60px;
+}
 </style>
