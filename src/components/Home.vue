@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <div class="container" style="margin-top:40px;">
+  <div id="home">
+    <div class="container">
       <h1 class="text-center">What Word is it ?</h1>
       <hr>
       <div style="margin-top:40px;">
@@ -40,4 +40,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+#home {
+  text-align: center;
+}
 </style>
