@@ -31,12 +31,6 @@ export default {
   methods: {
     clicked () {
       this.$router.push({path: '/'})
-      console.log(this.$router)
-    }
-  },
-  sockets: {
-    hi: (data) => {
-      console.log(data)
     }
   }
 }

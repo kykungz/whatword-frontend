@@ -1,12 +1,12 @@
 <template>
   <div id="home">
     <div class="container">
-      <h1 class="text-center">What Word is it ?</h1>
+      <h1>What Word is it ?</h1>
       <hr>
       <div style="margin-top:40px;">
-        <div class="content form-group">
+        <div class="text-left content form-group">
           <label>Enter Game ID:</label>
-          <input class="form-control form-control-lg" style="margin-bottom:10px;" placeholder="GAME ID" required>
+          <input class="text-center form-control form-control-lg" style="margin-bottom:10px;" placeholder="GAME ID" required>
           <button class="btn btn-primary btn-lg" type="submit" style="width:100%;">
             Join
           </button>
