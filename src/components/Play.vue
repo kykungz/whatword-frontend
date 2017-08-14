@@ -44,8 +44,10 @@ export default {
 }
 </script>
 
-<style>
-body {
+<style scoped>
+#play {
+  padding-top: 60px;
+  height: 100vh;
   background-color: #F9A492;
 }
 

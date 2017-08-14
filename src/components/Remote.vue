@@ -1,6 +1,6 @@
 <template lang="html">
-  <div style="margin-top: -60px;"class="fullscreen">
-    <div class="remote">
+  <div id="remote" class="fullscreen">
+    <div class="remote-content">
       <div class="alert alert-info text-center btn-fullscreen">
         <h2>Score: 0</h2>
         <h1>Word</h1>
@@ -44,7 +44,7 @@ export default {
 </script>
 
 <style scoped>
-.remote {
+.remote-content {
   max-width: 800px;
   margin: auto;
 }

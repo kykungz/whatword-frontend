@@ -1,5 +1,5 @@
 <template lang="html">
-  <div class="create">
+  <div id="create">
     <div class="container">
       <h1 class="text-center">What Word is it ?</h1>
       <hr>
@@ -77,7 +77,8 @@ export default {
 </script>
 
 <style scoped>
-.create {
+#create {
   margin-bottom: 60px;
+  margin-top: 60px;
 }
 </style>

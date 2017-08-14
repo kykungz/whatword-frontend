@@ -1,5 +1,5 @@
 <template lang="html">
-  <div>
+  <div id="dashboard">
     <div class="container">
       <h1 class="text-center">What Word is it ?</h1>
       <hr>
@@ -52,6 +52,7 @@ export default {
 </script>
 
 <style scoped>
-.room {
+#dashboard {
+  margin-top: 60px;
 }
 </style>
