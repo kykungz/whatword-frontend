@@ -13,13 +13,15 @@
                <h4>{{ wordBank.length }} Words</h4>
              </div>
            </div>
-           <textarea v-model="textArea" class="form-control" rows="18"></textarea>
+           <textarea v-model="textArea" placeholder="Insert your words here" class="form-control" rows="18"></textarea>
         </div>
         <div class="form-group">
           <label>Remote Password:</label>
-          <input v-model="password" class="form-control" type="password"></textarea>
+          <input v-model="password" class="form-control" placeholder="Password" type="password"></textarea>
         </div>
-
+        <div v-if="error" class="alert alert-warning" role="alert">
+          {{ errorMessage }}
+        </div>
         <button v-on:click="submit()" style="width:100%;" class="btn btn-warning btn-lg">Create</button>
       </div>
     </div>
@@ -32,16 +34,36 @@ export default {
   data () {
     return {
       textArea: '',
-      password: ''
+      password: '',
+      error: false,
+      errorMessage: ''
     }
   },
   methods: {
     async submit () {
-      const result = await customAxios.post('/create', {
-        wordBank: this.wordBank,
-        password: this.password
-      })
-      this.$router.push({name: 'Dashboard', params: {id: result.data}})
+      try {
+        // validation
+        if (!this.textArea.trim()) {
+          this.error = true
+          this.errorMessage = 'Word Bank is empty!'
+          return
+        }
+        if (!this.password.trim()) {
+          this.error = true
+          this.errorMessage = 'Password is empty!'
+          return
+        }
+        const result = await customAxios.post('/create', {
+          wordBank: this.wordBank,
+          password: this.password
+        })
+        console.log('ok')
+        this.$router.push({name: 'Dashboard', params: {id: result.data}})
+      } catch (e) {
+        console.log('400')
+        this.error = true
+        this.errorMessage = e.response.data
+      }
     }
   },
   computed: {
