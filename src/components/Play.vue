@@ -1,29 +1,34 @@
 <template lang="html">
-  <div>
-    <h1>{{ state.score }}</h1>
-    <h1>{{ state.currentWord }}</h1>
+  <div id="play">
+    <div class="container-fluid">
+      <div class="text-center">
+        <h1>Score: {{ state.score }}</h1>
+        <div class="container-fluid custom-border">
+          <h1 class="word">กองภณ จรัญวัฒนากิจ</h1>
+        </div>
+      </div>
+    </div>
+
   </div>
 </template>
 
 <script>
 import * as io from 'socket.io-client'
 import { ORIGIN_API_URL } from '@/libraries/variables'
-// import { validator } from '@/libraries/util'
-import customAxios from '@/libraries/customAxios'
+import { roomValidator } from '@/libraries/util'
 export default {
-  mounted () {
-    customAxios.get('/room', {params: {
-      id: this.$route.params.id
-    }}).then((result) => {
+  async mounted () {
+    try {
+      const result = await roomValidator.validate(this.$route.params.id)
+      this.state = result
       this.socket = io(ORIGIN_API_URL)
-      this.socket.emit('play', {roomId: this.$route.params.id})
+      this.socket.emit('join', {roomId: this.$route.params.id})
       this.socket.on('state', state => {
         this.state = state
       })
-      this.state = result
-    }).catch((result) => {
+    } catch (e) {
       this.$router.push({path: '/'})
-    })
+    }
   },
   destroyed () {
     if (this.socket) {
@@ -32,12 +37,27 @@ export default {
   },
   data () {
     return {
-      socket: undefined,
-      state: 43234
+      socket: {},
+      state: {}
     }
   }
 }
 </script>
 
-<style scoped>
+<style>
+body {
+  background-color: #F9A492;
+}
+
+.word {
+  font-size: 10vw;
+}
+
+.custom-border {
+  margin-top: 20vh;
+  padding-top: 1em;
+  background-color: white;
+  border: 4px solid black;
+  border-radius: 60px;
+}
 </style>

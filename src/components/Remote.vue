@@ -16,27 +16,28 @@
   </div>
 </template>
 <script>
-import { ORIGIN_API_URL } from '@/libraries/variables'
 import * as io from 'socket.io-client'
-import customAxios from '@/libraries/customAxios'
+import { ORIGIN_API_URL } from '@/libraries/variables'
+import { roomValidator } from '@/libraries/util'
 export default {
-  mounted () {
-    customAxios.get('/room', {params: {
-      id: this.$route.params.id
-    }}).then((result) => {
+  async mounted () {
+    try {
+      const result = await roomValidator.validate(this.$route.params.id)
+      this.state = result
       this.socket = io(ORIGIN_API_URL)
-      this.socket.emit('play', {roomId: this.$route.params.id})
+      this.socket.emit('join', {roomId: this.$route.params.id})
       this.socket.on('state', state => {
         this.state = state
       })
-      this.state = result
-    }).catch((result) => {
+    } catch (e) {
       this.$router.push({path: '/'})
-    })
+    }
   },
   data () {
     return {
-      roomId: this.$route.params.id
+      roomId: this.$route.params.id,
+      socket: {},
+      state: {}
     }
   }
 }
