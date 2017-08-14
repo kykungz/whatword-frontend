@@ -1,15 +1,28 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Hello from '@/components/Hello'
+import Home from '@/components/Home'
+import Play from '@/components/Play'
+import Create from '@/components/Create'
 
 Vue.use(Router)
 
 export default new Router({
+  mode: 'history',
   routes: [
     {
       path: '/',
-      name: 'Hello',
-      component: Hello
+      name: 'Home',
+      component: Home
+    },
+    {
+      path: '/play/:id',
+      name: 'Play',
+      component: Play
+    },
+    {
+      path: '/create',
+      name: 'Create',
+      component: Create
     }
   ]
 })
