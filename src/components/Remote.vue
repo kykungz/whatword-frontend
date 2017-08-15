@@ -11,7 +11,6 @@
         <button class="btn btn-dark btn-fullscreen"><h1>Hide word</h1></button>
         <button class="btn btn-danger btn-fullscreen"><h1>Restart</h1></button>
       </div>
-
     </div>
   </div>
 </template>

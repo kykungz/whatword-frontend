@@ -6,8 +6,11 @@
       <div style="margin-top:40px;">
         <div class="text-left content form-group">
           <label>Enter Game ID:</label>
-          <input class="text-center form-control form-control-lg" style="margin-bottom:10px;" placeholder="GAME ID" required>
-          <button class="btn btn-primary btn-lg fullwidth" type="submit">
+          <input v-model="roomId" class="text-center form-control form-control-lg" style="margin-bottom:10px;" placeholder="GAME ID" required>
+          <div v-if="error" class="alert alert-danger">
+            {{ errorMessage }}
+          </div>
+          <button @click="join()" class="btn btn-primary btn-lg fullwidth">
             Join
           </button>
         </div>
@@ -28,11 +31,26 @@
 </template>
 
 <script>
+import { roomValidator } from '@/libraries/util'
 export default {
   name: 'hello',
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App'
+      roomId: '',
+      msg: 'Welcome to Your Vue.js App',
+      error: false,
+      errorMessage: ''
+    }
+  },
+  methods: {
+    async join () {
+      try {
+        const result = await roomValidator.validate()
+        console.log(result.data)
+      } catch (err) {
+        this.error = true
+        this.errorMessage = err.response.data
+      }
     }
   }
 }
