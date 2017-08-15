@@ -45,7 +45,7 @@ export default {
   methods: {
     async join () {
       try {
-        await roomValidator.validate(this.roomId)
+        await roomValidator.validate({id: this.roomId})
         this.$router.push({name: 'Play', params: {id: this.roomId}})
       } catch (err) {
         this.error = true

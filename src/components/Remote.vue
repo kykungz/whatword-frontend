@@ -21,7 +21,9 @@ import { roomValidator } from '@/libraries/util'
 export default {
   async mounted () {
     try {
-      const result = await roomValidator.validate(this.$route.params.id)
+      const result = await roomValidator.validate({
+        id: this.$route.params.id
+      })
       this.state = result
       this.socket = io(ORIGIN_API_URL)
       this.socket.emit('join', {roomId: this.$route.params.id})

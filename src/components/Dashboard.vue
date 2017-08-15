@@ -58,7 +58,10 @@ import { roomValidator } from '@/libraries/util'
 export default {
   async mounted () {
     try {
-      await roomValidator.validate(this.$route.params.id)
+      await roomValidator.validate({
+        id: this.$route.params.id,
+        password: 'd'
+      })
     } catch (e) {
       this.$router.push({name: 'NotFound'})
     }
