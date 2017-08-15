@@ -4,11 +4,10 @@
       <div class="text-center">
         <h1>Score: {{ state.score }}</h1>
         <div class="container-fluid custom-border">
-          <h1 class="word">กองภณ จรัญวัฒนากิจ</h1>
+          <h1 class="word">{{ state.currentWord }}</h1>
         </div>
       </div>
     </div>
-
   </div>
 </template>
 
