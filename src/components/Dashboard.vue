@@ -59,12 +59,14 @@ export default {
   props: ['id'],
   async mounted () {
     try {
-      await roomValidator.validate({
+      const result = await roomValidator.validate({
         id: this.id,
-        password: 'd'
+        password: '123'
       })
+      const room = result.data.room
+      this.textArea = room.wordBank.join('\n')
     } catch (e) {
-      // this.$router.replace({path: '/123'})
+      this.$router.replace({name: '404'})
     }
   },
   data () {

@@ -61,7 +61,7 @@ export default {
         this.$router.push({name: 'Dashboard', params: {id: result.data}})
       } catch (e) {
         this.error = true
-        this.errorMessage = e // .response.data
+        this.errorMessage = e.response.data
       }
     }
   },
