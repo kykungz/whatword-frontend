@@ -16,8 +16,9 @@
            <textarea v-model="textArea" placeholder="Insert your words here" class="form-control" rows="18"></textarea>
         </div>
         <div class="form-group">
-          <label>Remote Password:</label>
-          <input v-model="password" class="form-control" placeholder="Password" autocomplete="off" type="password"></input>
+          <label>Remote PIN:</label>
+          <input v-model="password" class="form-control" placeholder="PIN (4 Digits)" autocomplete="off" type="password"></input>
+          <p class="text-right">Game PIN will be used for connecting to remote control</p>
         </div>
         <div v-if="error" class="alert alert-warning" role="alert">
           {{ errorMessage }}
@@ -57,10 +58,8 @@ export default {
           wordBank: this.wordBank,
           password: this.password
         })
-        console.log('ok')
         this.$router.push({name: 'Dashboard', params: {id: result.data}})
       } catch (e) {
-        console.log('400')
         this.error = true
         this.errorMessage = e.response.data
       }
@@ -68,9 +67,7 @@ export default {
   },
   computed: {
     wordBank () {
-      return this.textArea.split('\n').filter((word) => {
-        return word.trim() !== ''
-      })
+      return this.textArea.split('\n').filter((word) => word.trim() !== '')
     }
   }
 }

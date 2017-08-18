@@ -56,14 +56,15 @@
 import { ORIGIN_URL } from '@/libraries/variables'
 import { roomValidator } from '@/libraries/util'
 export default {
+  props: ['id'],
   async mounted () {
     try {
       await roomValidator.validate({
-        id: this.$route.params.id,
+        id: this.id,
         password: 'd'
       })
     } catch (e) {
-      this.$router.push({name: 'NotFound'})
+      this.$router.replace({name: '404'})
     }
   },
   data () {
@@ -71,9 +72,9 @@ export default {
       textArea: '',
       password: '',
       showConfig: false,
-      roomId: this.$route.params.id,
-      remoteURL: `${ORIGIN_URL}/remote/${this.$route.params.id}`,
-      playURL: `${ORIGIN_URL}/play/${this.$route.params.id}`
+      roomId: this.id,
+      remoteURL: `${ORIGIN_URL}/remote/${this.id}`,
+      playURL: `${ORIGIN_URL}/play/${this.id}`
     }
   },
   methods: {

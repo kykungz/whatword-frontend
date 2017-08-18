@@ -19,7 +19,8 @@ export default new Router({
     {
       path: '/play/:id',
       name: 'Play',
-      component: Play
+      component: Play,
+      props: true
     },
     {
       path: '/create',
@@ -29,17 +30,19 @@ export default new Router({
     {
       path: '/dashboard/:id',
       name: 'Dashboard',
-      component: Dashboard
+      component: Dashboard,
+      props: true
     },
     {
       path: '/remote/:id',
       name: 'Remote',
-      component: Remote
+      component: Remote,
+      props: true
     },
     {
       path: '*',
-      name: 'NotFound',
-      redirect: '/'
+      name: '404',
+      component: Remote
     }
   ]
 })

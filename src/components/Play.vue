@@ -16,14 +16,15 @@ import * as io from 'socket.io-client'
 import { ORIGIN_API_URL } from '@/libraries/variables'
 import { roomValidator } from '@/libraries/util'
 export default {
+  props: ['id'],
   async mounted () {
     try {
       const result = await roomValidator.validate({
-        id: this.$route.params.id
+        id: this.id
       })
       this.state = result
       this.socket = io(ORIGIN_API_URL)
-      this.socket.emit('join', {roomId: this.$route.params.id})
+      this.socket.emit('join', {roomId: this.id})
       this.socket.on('state', state => {
         this.state = state
       })
