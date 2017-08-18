@@ -64,7 +64,7 @@ export default {
         password: 'd'
       })
     } catch (e) {
-      this.$router.replace({name: '404'})
+      // this.$router.replace({path: '/123'})
     }
   },
   data () {

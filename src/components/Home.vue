@@ -10,9 +10,14 @@
           <div v-if="error" class="alert alert-danger">
             {{ errorMessage }}
           </div>
-          <button @click="join()" class="btn btn-primary btn-lg fullwidth">
-            Join
+          <button  @click="remote()" class="btn btn-danger btn-lg btn-block">
+            Remote
           </button>
+          <button @click="join()" style="margin-top:4px;" class="btn btn-primary btn-lg btn-block">
+            Play
+          </button>
+
+
         </div>
       </div>
       <hr>

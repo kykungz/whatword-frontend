@@ -23,7 +23,7 @@
         <div v-if="error" class="alert alert-warning" role="alert">
           {{ errorMessage }}
         </div>
-        <button v-on:click="submit()" class="btn btn-warning btn-lg fullwidth">Create</button>
+        <button v-on:click="submit()" class="btn btn-warning btn-lg btn-block">Create</button>
       </div>
     </div>
   </div>
@@ -61,7 +61,7 @@ export default {
         this.$router.push({name: 'Dashboard', params: {id: result.data}})
       } catch (e) {
         this.error = true
-        this.errorMessage = e.response.data
+        this.errorMessage = e // .response.data
       }
     }
   },
