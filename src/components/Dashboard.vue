@@ -55,17 +55,24 @@
 // import customAxios from '@/libraries/customAxios'
 import { ORIGIN_URL } from '@/libraries/variables'
 import { roomValidator } from '@/libraries/util'
+import { mapGetters } from 'vuex'
 export default {
   props: ['id'],
   async mounted () {
     try {
+      await roomValidator.validate({id: this.id})
+      if (!this.admins.map((admin) => admin.id).includes(this.id)) {
+        this.$router.replace({name: 'Auth', query: {id: this.id, target: 'Remote'}})
+        return
+      }
+      this.password = this.admins.find((admin) => admin.id === this.id).password
       const result = await roomValidator.validate({
         id: this.id,
-        password: '123'
+        password: this.password
       })
-      const room = result.room
-      this.textArea = room.wordBank.join('\n')
+      this.textArea = result.room.wordBank.join('\n')
     } catch (e) {
+      console.log(e)
       this.$router.replace({name: '404'})
     }
   },
@@ -88,6 +95,9 @@ export default {
     }
   },
   computed: {
+    ...mapGetters([
+      'admins'
+    ]),
     wordBank () {
       return this.textArea.split('\n').filter((word) => {
         return word.trim() !== ''

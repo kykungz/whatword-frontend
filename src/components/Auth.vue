@@ -3,10 +3,10 @@
     <div class="container">
       <div class="content">
         <label>Enter Game Password:</label>
-        <input v-model="password" class="text-center form-control form-control-lg" style="margin-bottom:10px;" placeholder="Password" required>
-        <div v-if="error" class="alert alert-danger">
+        <input v-model="password" :class="{'is-invalid': error}" class="text-center form-control form-control-lg" style="margin-bottom:10px;" placeholder="Password" required>
+        <label v-if="error" class="text-danger text-right">
           {{ errorMessage }}
-        </div>
+        </label>
         <button @click="auth" type="submit" class="btn btn-lg btn-primary btn-block">
           Go
         </button>
@@ -18,7 +18,6 @@
 <script>
 import { roomValidator } from '@/libraries/util'
 import { mapActions } from 'vuex'
-// import { mapGetters } from 'vuex'
 export default {
   mounted () {
     try {
@@ -56,7 +55,6 @@ export default {
           this.errorMessage = 'Wrong password!'
         }
       } catch (e) {
-        console.log(e)
         this.$router.replace({name: '404'})
       }
     }

@@ -24,7 +24,7 @@ export default {
       })
       this.state = result
       this.socket = io(ORIGIN_API_URL)
-      this.socket.emit('join', {roomId: this.id})
+      this.socket.emit('join', {id: this.id})
       this.socket.on('state', state => {
         this.state = state
       })

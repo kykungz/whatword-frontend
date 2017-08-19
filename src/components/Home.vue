@@ -5,10 +5,10 @@
       <hr>
       <div class="text-left content form-group">
         <label>Enter Game ID:</label>
-        <input v-model="roomId" class="text-center form-control form-control-lg" style="margin-bottom:10px;" placeholder="GAME ID" required>
-        <div v-if="error" class="alert alert-danger">
+        <input v-model="roomId" :class="{'is-invalid': error}" class="text-center form-control form-control-lg" style="margin-bottom:10px;" placeholder="GAME ID" required>
+        <label v-if="error" class="text-danger">
           {{ errorMessage }}
-        </div>
+        </label>
         <button  @click="remote()" class="btn btn-danger btn-lg btn-block">
           Remote
         </button>

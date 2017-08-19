@@ -16,9 +16,11 @@
            <textarea v-model="textArea" placeholder="Insert your words here" class="form-control" rows="18"></textarea>
         </div>
         <div class="form-group">
-          <label>Remote PIN:</label>
-          <input v-model="password" class="form-control" placeholder="PIN (4 Digits)" autocomplete="off" type="password"></input>
-          <p class="text-right">Game PIN will be used for connecting to remote control</p>
+          <label>Remote password:</label>
+          <input v-model="password" class="form-control" placeholder="Password" autocomplete="off" type="password"></input>
+          <span class="form-text text-muted">
+            Remote requires password in order to control the game.
+          </span>
         </div>
         <div v-if="error" class="alert alert-warning" role="alert">
           {{ errorMessage }}

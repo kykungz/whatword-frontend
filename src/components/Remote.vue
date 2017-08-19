@@ -23,23 +23,24 @@ export default {
   props: ['id'],
   async mounted () {
     try {
+      await roomValidator.validate({id: this.id})
       if (!this.admins.map((admin) => admin.id).includes(this.id)) {
         this.$router.replace({name: 'Auth', query: {id: this.id, target: 'Remote'}})
         return
       }
+      this.password = this.admins.find((admin) => admin.id === this.id).password
       const result = await roomValidator.validate({
         id: this.id,
         password: this.password
       })
       this.state = result
       this.socket = io(ORIGIN_API_URL)
-      this.socket.emit('join', {roomId: this.id})
+      this.socket.emit('join', {id: this.id})
       this.socket.on('state', state => {
         this.state = state
       })
     } catch (e) {
-      console.log(e)
-      this.$router.push({path: '/'})
+      this.$router.replace({name: '404'})
     }
   },
   computed: {
@@ -49,7 +50,7 @@ export default {
   },
   data () {
     return {
-      roomId: this.id,
+      password: '',
       socket: {},
       state: {}
     }
