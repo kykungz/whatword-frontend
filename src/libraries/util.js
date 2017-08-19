@@ -5,6 +5,6 @@ export const roomValidator = {
     const result = await customAxios.get('/room', {params: {
       id, password
     }})
-    return result
+    return result.data
   }
 }

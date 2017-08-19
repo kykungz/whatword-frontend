@@ -31,6 +31,7 @@
 
 <script>
 import customAxios from '@/libraries/customAxios'
+import { mapActions } from 'vuex'
 export default {
   data () {
     return {
@@ -41,6 +42,9 @@ export default {
     }
   },
   methods: {
+    ...mapActions([
+      'pushAdmin'
+    ]),
     async submit () {
       try {
         // validation
@@ -58,7 +62,8 @@ export default {
           wordBank: this.wordBank,
           password: this.password
         })
-        this.$router.push({name: 'Dashboard', params: {id: result.data}})
+        this.pushAdmin({ id: result.data, password: this.password })
+        this.$router.push({ name: 'Dashboard', params: { id: result.data } })
       } catch (e) {
         this.error = true
         this.errorMessage = e.response.data

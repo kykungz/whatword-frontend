@@ -5,6 +5,7 @@ import Play from '@/components/Play'
 import Create from '@/components/Create'
 import Dashboard from '@/components/Dashboard'
 import Remote from '@/components/Remote'
+import Auth from '@/components/Auth'
 
 Vue.use(Router)
 
@@ -38,6 +39,11 @@ export default new Router({
       name: 'Remote',
       component: Remote,
       props: true
+    },
+    {
+      path: '/auth',
+      name: 'Auth',
+      component: Auth
     },
     {
       path: '*',

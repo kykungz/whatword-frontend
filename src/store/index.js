@@ -4,11 +4,19 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    count: 0
+    admins: []
+  },
+  getters: {
+    admins: (state) => state.admins
   },
   mutations: {
-    increment (state) {
-      state.count++
+    PUSH_ADMIN (state, {id, password}) {
+      state.admins.push({id, password})
+    }
+  },
+  actions: {
+    pushAdmin (context, {id, password}) {
+      context.commit('PUSH_ADMIN', {id, password})
     }
   }
 })

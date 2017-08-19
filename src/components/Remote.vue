@@ -8,7 +8,7 @@
       <div class="btn-group-vertical btn-group-fullscreen">
         <button class="btn btn-success btn-fullscreen"><h1>Correct</h1></button>
         <button class="btn btn-info btn-fullscreen"><h1>Skip</h1></button>
-        <button class="btn btn-dark btn-fullscreen"><h1>Hide word</h1></button>
+        <button class="btn btn-dark btn-fullscreen"><h1>Hide</h1></button>
         <button class="btn btn-danger btn-fullscreen"><h1>Restart</h1></button>
       </div>
     </div>
@@ -18,12 +18,18 @@
 import * as io from 'socket.io-client'
 import { ORIGIN_API_URL } from '@/libraries/variables'
 import { roomValidator } from '@/libraries/util'
+import { mapGetters } from 'vuex'
 export default {
   props: ['id'],
   async mounted () {
     try {
+      if (!this.admins.map((admin) => admin.id).includes(this.id)) {
+        this.$router.replace({name: 'Auth', query: {id: this.id, target: 'Remote'}})
+        return
+      }
       const result = await roomValidator.validate({
-        id: this.id
+        id: this.id,
+        password: this.password
       })
       this.state = result
       this.socket = io(ORIGIN_API_URL)
@@ -32,8 +38,14 @@ export default {
         this.state = state
       })
     } catch (e) {
+      console.log(e)
       this.$router.push({path: '/'})
     }
+  },
+  computed: {
+    ...mapGetters([
+      'admins'
+    ])
   },
   data () {
     return {

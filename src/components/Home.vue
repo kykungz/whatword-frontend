@@ -3,22 +3,18 @@
     <div class="container">
       <h1>What Word is it ?</h1>
       <hr>
-      <div style="margin-top:40px;">
-        <div class="text-left content form-group">
-          <label>Enter Game ID:</label>
-          <input v-model="roomId" class="text-center form-control form-control-lg" style="margin-bottom:10px;" placeholder="GAME ID" required>
-          <div v-if="error" class="alert alert-danger">
-            {{ errorMessage }}
-          </div>
-          <button  @click="remote()" class="btn btn-danger btn-lg btn-block">
-            Remote
-          </button>
-          <button @click="join()" style="margin-top:4px;" class="btn btn-primary btn-lg btn-block">
-            Play
-          </button>
-
-
+      <div class="text-left content form-group">
+        <label>Enter Game ID:</label>
+        <input v-model="roomId" class="text-center form-control form-control-lg" style="margin-bottom:10px;" placeholder="GAME ID" required>
+        <div v-if="error" class="alert alert-danger">
+          {{ errorMessage }}
         </div>
+        <button  @click="remote()" class="btn btn-danger btn-lg btn-block">
+          Remote
+        </button>
+        <button @click="join()" style="margin-top:4px;" class="btn btn-primary btn-lg btn-block">
+          Play
+        </button>
       </div>
       <hr>
       <h3 class="text-center">OR</h3>
@@ -48,6 +44,15 @@ export default {
     }
   },
   methods: {
+    async remote () {
+      try {
+        await roomValidator.validate({id: this.roomId})
+        this.$router.push({name: 'Remote', params: {id: this.roomId}})
+      } catch (err) {
+        this.error = true
+        this.errorMessage = err.response.data
+      }
+    },
     async join () {
       try {
         await roomValidator.validate({id: this.roomId})

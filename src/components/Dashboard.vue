@@ -63,7 +63,7 @@ export default {
         id: this.id,
         password: '123'
       })
-      const room = result.data.room
+      const room = result.room
       this.textArea = room.wordBank.join('\n')
     } catch (e) {
       this.$router.replace({name: '404'})
