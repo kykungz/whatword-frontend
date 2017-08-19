@@ -3,7 +3,7 @@
     <div class="container">
       <div class="content">
         <label>Enter Game Password:</label>
-        <input v-model="password" :class="{'is-invalid': error}" class="text-center form-control form-control-lg" style="margin-bottom:10px;" placeholder="Password" required>
+        <input type="password" v-model="password" :class="{'is-invalid': error}" class="text-center form-control form-control-lg" style="margin-bottom:10px;" placeholder="Password" required>
         <label v-if="error" class="text-danger text-right">
           {{ errorMessage }}
         </label>

@@ -1,6 +1,6 @@
 <template>
-  <div id="home">
-    <div class="container">
+  <div class="container">
+    <div id="home">
       <h1>What Word is it ?</h1>
       <hr>
       <div class="text-left content form-group">
@@ -27,7 +27,11 @@
         </router-link>
       </div>
     </div>
-    <p>Welcome to Guess What ?</p>
+    <div style="margin-top:20px" class="content text-right">
+      <a href="/">
+        <big>How to play?</big>
+      </a>
+    </div>
   </div>
 </template>
 
