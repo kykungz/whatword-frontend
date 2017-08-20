@@ -47,6 +47,9 @@
                </label>
             </div>
             <button v-on:click="update()" class="btn btn-warning btn-lg fullwidth">Update</button>
+            <label v-if="success" class="text-success">
+              Game updated! You must restart your game before the new setting will take effect.
+            </label>
           </div>
         </transition>
       </div>
@@ -87,7 +90,8 @@ export default {
       remoteURL: `${ORIGIN_URL}/remote/${this.id}`,
       playURL: `${ORIGIN_URL}/play/${this.id}`,
       error: false,
-      errorMessage: ''
+      errorMessage: '',
+      success: false
     }
   },
   methods: {
@@ -102,8 +106,11 @@ export default {
           wordBank: this.wordBank
         })
         this.textArea = result.data.wordBank.join('\n')
+        this.success = true
+        this.error = false
       } catch (e) {
         this.error = true
+        this.success = false
         console.log(e.response.data)
         this.errorMessage = e.response.data
       }
