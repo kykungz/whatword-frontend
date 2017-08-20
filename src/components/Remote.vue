@@ -23,7 +23,6 @@ export default {
   props: ['id'],
   async mounted () {
     try {
-      await roomValidator.validate({id: this.id})
       if (!this.admins.map((admin) => admin.id).includes(this.id)) {
         this.$router.replace({name: 'Auth', query: {id: this.id, target: 'Remote'}})
         return

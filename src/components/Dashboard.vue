@@ -9,18 +9,18 @@
           <div class="form-group">
             <br>
             <label for="">Game ID:</label>
-            <h1 class="alert alert-info"> {{roomId}} </h1>
+            <h1 class="alert alert-info"> {{ id }} </h1>
           </div>
         </div>
         <h5>
           Remote URL:
-          <router-link :to="{ name: 'Remote', params: {id: roomId}}">
+          <router-link :to="{ name: 'Remote', params: { id }}">
             {{ remoteURL }}
           </router-link>
         </h5>
         <h5>
           Play URL:
-          <router-link :to="{ name: 'Play', params: {id: roomId}}">
+          <router-link :to="{ name: 'Play', params: { id }}">
             {{ playURL }}
           </router-link>
         </h5>
@@ -42,6 +42,9 @@
                  </div>
                </div>
                <textarea v-model="textArea" placeholder="Insert your words here" class="form-control" rows="18"></textarea>
+               <label v-if="error" class="text-danger">
+                 {{ errorMessage }}
+               </label>
             </div>
             <button v-on:click="update()" class="btn btn-warning btn-lg fullwidth">Update</button>
           </div>
@@ -56,13 +59,13 @@
 import { ORIGIN_URL } from '@/libraries/variables'
 import { roomValidator } from '@/libraries/util'
 import { mapGetters } from 'vuex'
+import customAxios from '@/libraries/customAxios'
 export default {
   props: ['id'],
   async mounted () {
     try {
-      await roomValidator.validate({id: this.id})
       if (!this.admins.map((admin) => admin.id).includes(this.id)) {
-        this.$router.replace({name: 'Auth', query: {id: this.id, target: 'Remote'}})
+        this.$router.replace({name: 'Auth', query: {id: this.id, target: 'Dashboard'}})
         return
       }
       this.password = this.admins.find((admin) => admin.id === this.id).password
@@ -81,17 +84,29 @@ export default {
       textArea: '',
       password: '',
       showConfig: false,
-      roomId: this.id,
       remoteURL: `${ORIGIN_URL}/remote/${this.id}`,
-      playURL: `${ORIGIN_URL}/play/${this.id}`
+      playURL: `${ORIGIN_URL}/play/${this.id}`,
+      error: false,
+      errorMessage: ''
     }
   },
   methods: {
     config () {
       this.showConfig = !this.showConfig
     },
-    update () {
-      console.log(2)
+    async update () {
+      try {
+        const result = await customAxios.post('/update', {
+          id: this.id,
+          password: this.password,
+          wordBank: this.wordBank
+        })
+        this.textArea = result.data.wordBank.join('\n')
+      } catch (e) {
+        this.error = true
+        console.log(e.response.data)
+        this.errorMessage = e.response.data
+      }
     }
   },
   computed: {

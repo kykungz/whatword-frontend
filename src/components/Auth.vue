@@ -19,11 +19,12 @@
 import { roomValidator } from '@/libraries/util'
 import { mapActions } from 'vuex'
 export default {
-  mounted () {
+  async mounted () {
     try {
       this.id = this.$route.query.id
       this.target = this.$route.query.target
       if (!this.id || !this.target) throw new Error()
+      await roomValidator.validate({id: this.id})
     } catch (e) {
       this.$router.replace({name: '404'})
     }
