@@ -46,7 +46,10 @@
                  {{ errorMessage }}
                </label>
             </div>
-            <button v-on:click="update()" class="btn btn-warning btn-lg fullwidth">Update</button>
+            <button :disabled="loading" v-on:click="update()" class="btn btn-warning btn-lg fullwidth">
+              <icon v-show="loading" name="circle-o-notch" spin></icon>
+              Update
+            </button>
             <label v-if="success" class="text-success">
               Game updated! You must restart your game before the new setting will take effect.
             </label>
@@ -78,7 +81,6 @@ export default {
       })
       this.textArea = result.room.wordBank.join('\n')
     } catch (e) {
-      console.log(e)
       this.$router.replace({name: '404'})
     }
   },
@@ -91,7 +93,8 @@ export default {
       playURL: `${ORIGIN_URL}/play/${this.id}`,
       error: false,
       errorMessage: '',
-      success: false
+      success: false,
+      loading: false
     }
   },
   methods: {
@@ -99,6 +102,7 @@ export default {
       this.showConfig = !this.showConfig
     },
     async update () {
+      this.loading = true
       try {
         const result = await customAxios.post('/update', {
           id: this.id,
@@ -113,6 +117,8 @@ export default {
         this.success = false
         console.log(e.response.data)
         this.errorMessage = e.response.data
+      } finally {
+        this.loading = false
       }
     }
   },

@@ -9,12 +9,15 @@
         <label v-if="error" class="text-danger">
           {{ errorMessage }}
         </label>
-        <button  @click="remote()" class="btn btn-danger btn-lg btn-block">
+        <button :disabled="remoteLoading || playLoading" @click="remote()" class="btn btn-danger btn-lg btn-block">
+          <icon v-show="remoteLoading" name="circle-o-notch" spin></icon>
           Remote
         </button>
-        <button @click="join()" style="margin-top:4px;" class="btn btn-primary btn-lg btn-block">
+        <button :disabled="remoteLoading || playLoading" @click="join()" style="margin-top:4px;" class="btn btn-primary btn-lg btn-block">
+          <icon v-show="playLoading" name="circle-o-notch" spin></icon>
           Play
         </button>
+
       </div>
       <hr>
       <h3 class="text-center">OR</h3>
@@ -44,26 +47,34 @@ export default {
       roomId: '',
       msg: 'Welcome to Your Vue.js App',
       error: false,
-      errorMessage: ''
+      errorMessage: '',
+      remoteLoading: false,
+      playLoading: false
     }
   },
   methods: {
     async remote () {
+      this.remoteLoading = true
       try {
         await roomValidator.validate({id: this.roomId})
         this.$router.push({name: 'Remote', params: {id: this.roomId}})
       } catch (err) {
         this.error = true
         this.errorMessage = err.response.data
+      } finally {
+        this.remoteLoading = false
       }
     },
     async join () {
+      this.playLoading = true
       try {
         await roomValidator.validate({id: this.roomId})
         this.$router.push({name: 'Play', params: {id: this.roomId}})
       } catch (err) {
         this.error = true
         this.errorMessage = err.response.data
+      } finally {
+        this.playLoading = false
       }
     }
   }

@@ -7,7 +7,8 @@
         <label v-if="error" class="text-danger text-right">
           {{ errorMessage }}
         </label>
-        <button @click="auth" type="submit" class="btn btn-lg btn-primary btn-block">
+        <button :disabled="loading" @click="auth" type="submit" class="btn btn-lg btn-primary btn-block">
+          <icon v-show="loading" name="circle-o-notch" spin></icon>
           Go
         </button>
       </div>
@@ -35,7 +36,8 @@ export default {
       password: '',
       target: '',
       error: false,
-      errorMessage: ''
+      errorMessage: '',
+      loading: false
     }
   },
   methods: {
@@ -43,6 +45,7 @@ export default {
       'pushAdmin'
     ]),
     async auth () {
+      this.loading = true
       try {
         const result = await roomValidator.validate({
           id: this.id,
@@ -57,6 +60,8 @@ export default {
         }
       } catch (e) {
         this.$router.replace({name: '404'})
+      } finally {
+        this.loading = false
       }
     }
   }
