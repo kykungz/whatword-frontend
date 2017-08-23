@@ -1,11 +1,11 @@
 <template lang="html">
-  <div id="remote" class="fullscreen">
+  <div id="remote">
     <div class="remote-content">
       <div class="alert alert-info text-center btn-fullscreen">
         <h2>Score: 0</h2>
         <h1>Word</h1>
       </div>
-      <div class="btn-group-vertical btn-group-fullscreen">
+      <div class="btn-group-vertical btn-block">
         <button class="btn btn-success btn-fullscreen"><h1>Correct</h1></button>
         <button class="btn btn-info btn-fullscreen"><h1>Skip</h1></button>
         <button class="btn btn-dark btn-fullscreen"><h1>Hide</h1></button>
@@ -62,22 +62,10 @@ export default {
   max-width: 800px;
   margin: auto;
 }
-.half-horizontal-screen{
-  float: left;
-  width: 50%;
-}
+
 .btn-fullscreen {
   margin: auto;
   width: 100%;
   height: 20vh;
-}
-
-.btn-group-fullscreen {
-  width: 100%;
-}
-
-.fullscreen {
-  width: 100%;
-  height: 100vh;
 }
 </style>

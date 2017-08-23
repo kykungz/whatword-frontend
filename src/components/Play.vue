@@ -4,7 +4,12 @@
       <div class="text-center">
         <h1>Score: {{ state.score }}</h1>
         <div class="container-fluid custom-border">
-          <h1 class="word">{{ state.currentWord }}</h1>
+          <h1 class="word">
+            <div v-show="state.currentWord === undefined" class="hidden-word">
+              &nbsp;
+            </div>
+            {{ state.currentWord }}
+          </h1>
         </div>
       </div>
     </div>
@@ -50,16 +55,23 @@ export default {
 #play {
   padding-top: 60px;
   height: 100vh;
-  background-color: #F9A492;
+  background-color: #f98c75;
 }
 
 .word {
   font-size: 10vw;
+  margin-top: 0.3em;
+}
+
+.hidden-word {
+  margin-top: -0.2em;
+  background-color: black;
+  width: 100%;
+  height: 100%;
 }
 
 .custom-border {
   margin-top: 20vh;
-  padding-top: 1em;
   background-color: white;
   border: 4px solid black;
   border-radius: 60px;
