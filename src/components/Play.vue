@@ -55,7 +55,7 @@ export default {
 #play {
   padding-top: 60px;
   height: 100vh;
-  background-color: #f98c75;
+  background-color: #ff9b86;
 }
 
 .word {

@@ -1,11 +1,11 @@
 <template lang="html">
   <div id="remote">
     <div class="remote-content">
-      <div class="alert alert-info text-center btn-fullscreen">
+      <div class="status alert alert-info text-center">
         <h2>Score: 0</h2>
         <h1>Word</h1>
       </div>
-      <div class="btn-group-vertical btn-block">
+      <div style="height: 80%" class="btn-group-vertical btn-block">
         <button class="btn btn-success btn-fullscreen"><h1>Correct</h1></button>
         <button class="btn btn-info btn-fullscreen"><h1>Skip</h1></button>
         <button class="btn btn-dark btn-fullscreen"><h1>Hide</h1></button>
@@ -58,14 +58,23 @@ export default {
 </script>
 
 <style scoped>
+#remote {
+  height: 100vh;
+}
+
 .remote-content {
-  max-width: 800px;
   margin: auto;
+  max-width: 800px;
+  height: 100%;
+}
+
+.status {
+  margin: auto;
+  height: 20%;
 }
 
 .btn-fullscreen {
   margin: auto;
-  width: 100%;
-  height: 20vh;
+  height: 100%;
 }
 </style>
