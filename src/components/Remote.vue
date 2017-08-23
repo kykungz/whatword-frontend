@@ -6,10 +6,10 @@
         <h1>Word</h1>
       </div>
       <div style="height: 80%" class="btn-group-vertical btn-block">
-        <button class="btn btn-success btn-fullscreen"><h1>Correct</h1></button>
-        <button class="btn btn-info btn-fullscreen"><h1>Skip</h1></button>
-        <button class="btn btn-dark btn-fullscreen"><h1>Hide</h1></button>
-        <button class="btn btn-danger btn-fullscreen"><h1>Restart</h1></button>
+        <button @click="correct" class="btn btn-success btn-fullscreen"><h1>Correct</h1></button>
+        <button @click="skip" class="btn btn-info btn-fullscreen"><h1>Skip</h1></button>
+        <button @click="hide" class="btn btn-dark btn-fullscreen"><h1>Hide</h1></button>
+        <button @click="restart" class="btn btn-danger btn-fullscreen"><h1>Restart</h1></button>
       </div>
     </div>
   </div>
@@ -42,17 +42,47 @@ export default {
       this.$router.replace({name: '404'})
     }
   },
-  computed: {
-    ...mapGetters([
-      'admins'
-    ])
-  },
   data () {
     return {
       password: '',
       socket: {},
       state: {}
     }
+  },
+  methods: {
+    async correct () {
+      this.socket.emit('remote', {
+        id: this.id,
+        password: this.password,
+        action: 'correct'
+      })
+    },
+    async skip () {
+      this.socket.emit('remote', {
+        id: this.id,
+        password: this.password,
+        action: 'skip'
+      })
+    },
+    async hide () {
+      this.socket.emit('remote', {
+        id: this.id,
+        password: this.password,
+        action: 'hide'
+      })
+    },
+    async restart () {
+      this.socket.emit('remote', {
+        id: this.id,
+        password: this.password,
+        action: 'restart'
+      })
+    }
+  },
+  computed: {
+    ...mapGetters([
+      'admins'
+    ])
   }
 }
 </script>

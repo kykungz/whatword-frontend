@@ -34,10 +34,11 @@ export default {
         this.state = state
       })
     } catch (e) {
-      this.$router.push({path: '/'})
+      this.$router.push({path: '404'})
     }
   },
   destroyed () {
+    // TODO: fix bug no socket has no disconnect function
     if (this.socket) {
       this.socket.disconnect()
     }
