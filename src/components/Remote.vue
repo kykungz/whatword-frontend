@@ -3,12 +3,23 @@
     <div class="remote-content">
       <div class="status alert alert-info text-center">
         <h2>Score: 0</h2>
-        <h1>Word</h1>
+        <h1>
+          <label v-if="this.state.currentWord === undefined" class="badge badge-pill badge-danger">
+            Hiding
+          </label>
+          {{ this.state.currentWord }}
+        </h1>
       </div>
       <div style="height: 80%" class="btn-group-vertical btn-block">
         <button @click="correct" class="btn btn-success btn-fullscreen"><h1>Correct</h1></button>
         <button @click="skip" class="btn btn-info btn-fullscreen"><h1>Skip</h1></button>
-        <button @click="hide" class="btn btn-dark btn-fullscreen"><h1>Hide</h1></button>
+        <button @click="hide"
+          :class="{'btn-dark': !this.state.hiding, 'btn-light': this.state.hiding}"
+          class="btn btn-fullscreen">
+          <h1>
+            {{ this.state.hiding ? 'Show' : 'Hide'}}
+          </h1>
+        </button>
         <button @click="restart" class="btn btn-danger btn-fullscreen"><h1>Restart</h1></button>
       </div>
     </div>
@@ -36,6 +47,7 @@ export default {
       this.socket = io(ORIGIN_API_URL)
       this.socket.emit('join', {id: this.id})
       this.socket.on('state', state => {
+        console.log('incoming state', state)
         this.state = state
       })
     } catch (e) {
@@ -65,11 +77,19 @@ export default {
       })
     },
     async hide () {
-      this.socket.emit('remote', {
-        id: this.id,
-        password: this.password,
-        action: 'hide'
-      })
+      if (this.state.hiding) {
+        this.socket.emit('remote', {
+          id: this.id,
+          password: this.password,
+          action: 'show'
+        })
+      } else {
+        this.socket.emit('remote', {
+          id: this.id,
+          password: this.password,
+          action: 'hide'
+        })
+      }
     },
     async restart () {
       this.socket.emit('remote', {
