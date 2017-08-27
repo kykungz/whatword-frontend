@@ -34,7 +34,7 @@ export default {
         this.state = state
       })
     } catch (e) {
-      this.$router.push({path: '404'})
+      this.$router.push({name: '404'})
     }
   },
   destroyed () {

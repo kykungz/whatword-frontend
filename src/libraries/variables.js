@@ -1,3 +1,3 @@
-export const ORIGIN_API_URL = process.env.NODE_ENV === 'production' ? 'production_api' : 'http://192.168.1.39:5000'// 'http://localhost:5000'
+export const ORIGIN_API_URL = process.env.NODE_ENV === 'production' ? 'production_api' : 'http://192.168.2.100:5000'// 'http://localhost:5000'
 
 export const ORIGIN_URL = process.env.NODE_ENV === 'production' ? 'production_url' : 'http://localhost:8080'

@@ -2,18 +2,30 @@
   <div id="remote">
     <div class="remote-content">
       <div class="status alert alert-info text-center">
-        <h2>Score: 0</h2>
+        <div class="row">
+          <div class="col-6">
+            <h2>Score: {{ this.state.score }}</h2>
+          </div>
+          <div class="col-6">
+            <h2>Left: {{ this.state.remaining }}</h2>
+          </div>
+        </div>
         <h1>
-          <label v-if="this.state.currentWord === undefined" class="badge badge-pill badge-danger">
-            Hiding
-          </label>
+          <div class="d-inline-flex">
+            <small v-if="this.state.remaining !== 0 && this.state.hiding" class="badge badge-pill badge-danger">
+              Hiding
+            </small>
+            <small v-if="this.state.remaining === 0 && this.state.hiding" class="badge badge-pill badge-danger">
+              Game Over
+            </small>
+          </div>
           {{ this.state.currentWord }}
         </h1>
       </div>
       <div style="height: 80%" class="btn-group-vertical btn-block">
-        <button @click="correct" class="btn btn-success btn-fullscreen"><h1>Correct</h1></button>
-        <button @click="skip" class="btn btn-info btn-fullscreen"><h1>Skip</h1></button>
-        <button @click="hide"
+        <button :disabled="this.state.hiding" @click="correct" class="btn btn-success btn-fullscreen"><h1>Correct</h1></button>
+        <button :disabled="this.state.hiding" @click="skip" class="btn btn-info btn-fullscreen"><h1>Skip</h1></button>
+        <button :disabled="this.state.remaining === 0 && this.state.hiding" @click="hide_show"
           :class="{'btn-dark': !this.state.hiding, 'btn-light': this.state.hiding}"
           class="btn btn-fullscreen">
           <h1>
@@ -76,7 +88,7 @@ export default {
         action: 'skip'
       })
     },
-    async hide () {
+    async hide_show () {
       if (this.state.hiding) {
         this.socket.emit('remote', {
           id: this.id,
