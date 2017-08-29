@@ -1,7 +1,7 @@
 <template lang="html">
   <div id="create">
     <div class="container">
-      <h1 class="text-center">What Word is it ?</h1>
+      <h1 class="text-center">What Word is it ??????</h1>
       <hr>
       <div class="content">
         <div class="form-group">
