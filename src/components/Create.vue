@@ -25,7 +25,10 @@
         <div v-if="error" class="alert alert-warning" role="alert">
           {{ errorMessage }}
         </div>
-        <button v-on:click="submit()" class="btn btn-warning btn-lg btn-block">Create</button>
+        <button :disabled="loading" v-on:click="submit()" class="btn btn-warning btn-lg btn-block">
+          <icon v-show="loading" name="circle-o-notch" spin></icon>
+          Create
+        </button>
       </div>
     </div>
   </div>
@@ -40,7 +43,8 @@ export default {
       textArea: '',
       password: '',
       error: false,
-      errorMessage: ''
+      errorMessage: '',
+      loading: false
     }
   },
   methods: {
@@ -60,6 +64,7 @@ export default {
           this.errorMessage = 'Password is empty!'
           return
         }
+        this.loading = true
         const result = await customAxios.post('/create', {
           wordBank: this.wordBank,
           password: this.password
@@ -69,6 +74,8 @@ export default {
       } catch (e) {
         this.error = true
         this.errorMessage = e.response.data
+      } finally {
+        this.loading = false
       }
     }
   },
