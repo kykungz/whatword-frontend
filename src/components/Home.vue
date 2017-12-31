@@ -31,9 +31,9 @@
       </div>
     </div>
     <div style="margin-top:20px" class="content text-right">
-      <a href="/">
+      <router-link :to="{ name: 'Home' }">
         <big>How to play?</big>
-      </a>
+      </router-link>
     </div>
   </div>
 </template>
