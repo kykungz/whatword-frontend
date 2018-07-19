@@ -59,8 +59,10 @@ export default {
       this.socket = io(ORIGIN_API_URL)
       this.socket.emit('join', {id: this.id})
       this.socket.on('state', state => {
-        console.log('incoming state', state)
-        this.state = state
+        // FIXME: Fix this to use socket-io's namespace
+        if (this.id === state.id) {
+          this.state = state
+        }
       })
     } catch (e) {
       this.$router.replace({name: '404'})
