@@ -16,8 +16,8 @@
           <router-link :to="{ name: 'Remote', params: { id }}">
             {{ remoteURL }}
           </router-link>
-          <qr-code class="mx-auto mt-3 mb-1" style="width: fit-content" :text="remoteURL" />
-          <div class="text-center"><small><i>Remote URL</i></small></div>
+          <qr-code :text="remoteURL" class="mx-auto mt-3 mb-1" style="width: fit-content" />
+          <div class="text-center"><small><i>Remote Control URL</i></small></div>
         </h5>
         <h5 class="mt-3">
           Play URL:
