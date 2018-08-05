@@ -15,9 +15,19 @@
            </div>
            <textarea v-model="textArea" placeholder="Insert your words here" class="form-control" rows="18"></textarea>
         </div>
-        <div class="form-group">
+        <div class="d-flex align-items-center justify-content-between mb-2">
+          <h4 class="mb-0">Color:</h4>
+          <div class="preview-color" :style="{ background: selectedColor }" />
+        </div>
+        <div class="d-flex align-items-center justify-content-between">
+          <div class="d-flex">
+            <div v-for="color in colors" @click="changeColor(color)" :class="['color', { 'selected': color === selectedColor }]" :style="{ background: color }" :key="color" />
+          </div>
+          <input v-model="selectedColor" size="4" class="ml-2 w-25 text-right form-control" placeholder="#000000" />
+        </div>
+        <div class="form-group mt-2">
           <label>Remote password:</label>
-          <input v-model="password" class="form-control password" placeholder="Password" autocomplete="off"></input>
+          <input v-model="password" class="form-control password" placeholder="Password" />
           <span class="form-text text-muted">
             Remote requires password in order to control the game.
           </span>
@@ -44,13 +54,29 @@ export default {
       password: '',
       error: false,
       errorMessage: '',
-      loading: false
+      loading: false,
+      selectedColor: '#fc5c65',
+      colors: [
+        '#fc5c65',
+        '#fd9644',
+        '#fed330',
+        '#26de81',
+        '#45aaf2',
+        '#3867d6',
+        '#a55eea',
+        '#d1d8e0',
+        '#4b6584'
+      ]
     }
   },
   methods: {
     ...mapActions([
       'pushAdmin'
     ]),
+    changeColor (color) {
+      console.log(color)
+      this.selectedColor = color
+    },
     async submit () {
       try {
         // validation
@@ -67,6 +93,7 @@ export default {
         this.loading = true
         const result = await customAxios.post('/create', {
           wordBank: this.wordBank,
+          color: this.selectedColor,
           password: this.password
         })
         this.pushAdmin({ id: result.data, password: this.password })
@@ -91,5 +118,35 @@ export default {
 #create {
   margin-bottom: 60px;
   margin-top: 60px;
+}
+
+.color {
+  width: 30px;
+  height: 30px;
+  border-radius: 4px;
+  cursor: pointer;
+  border: thin solid white;
+  transition: all 300ms;
+}
+
+.preview-color {
+  width: 100%;
+  height: 30px;
+  margin-left: 1em;
+  border-radius: 4px;
+  transition: all 300ms;
+}
+
+.color:hover {
+  border: thin solid #2e2e2e;
+}
+
+.selected {
+  border: thin solid #2e2e2e;
+  box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.6);
+}
+
+.color + .color {
+  margin-left: .25em;
 }
 </style>

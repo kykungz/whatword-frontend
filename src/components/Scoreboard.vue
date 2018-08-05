@@ -1,5 +1,5 @@
 <template lang="html">
-  <div id="scoreboard" :style="`background: ${state.bg}`">
+  <div id="scoreboard" :style="{ background: state.color }">
     <div class="d-flex justify-content-center align-items-center h-100 w-100">
       <div class="custom-border">
         <div class="score-text">Score:</div>
