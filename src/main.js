@@ -7,9 +7,11 @@ import store from './store'
 
 import 'bootstrap/dist/css/bootstrap.css'
 
+import VueQRCodeComponent from 'vue-qrcode-component'
 import Icon from 'vue-awesome/components/Icon'
 import 'vue-awesome/icons'
 
+Vue.component('qr-code', VueQRCodeComponent)
 Vue.component('icon', Icon)
 
 Vue.config.productionTip = false
