@@ -5,9 +5,8 @@
       <hr>
       <div class="content">
         <div class="text-center">
-          <h1>Your game is ready</h1>
+          <h2>Your game is ready</h2>
           <div class="form-group">
-            <br>
             <label for="">Game ID:</label>
             <h1 class="alert alert-info"> {{ id }} </h1>
           </div>
@@ -17,9 +16,10 @@
           <router-link :to="{ name: 'Remote', params: { id }}">
             {{ remoteURL }}
           </router-link>
-          <qr-code class="mx-auto my-4" style="width: fit-content" :text="remoteURL" />
+          <qr-code class="mx-auto mt-3 mb-1" style="width: fit-content" :text="remoteURL" />
+          <div class="text-center"><small><i>Remote URL</i></small></div>
         </h5>
-        <h5>
+        <h5 class="mt-3">
           Play URL:
           <router-link :to="{ name: 'Play', params: { id }}">
             {{ playURL }}
