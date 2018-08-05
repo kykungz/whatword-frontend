@@ -33,21 +33,14 @@
         </div>
         <transition name="fade" mode="out-in" appear>
           <div v-show="showConfig">
-            <div class="form-group">
-               <div class="row">
-                 <div class="col-6">
-                   <h4>Word Bank:</h4>
-                 </div>
-                 <div class="col-6 text-right">
-                   <h4>{{ wordBank.length }} Words</h4>
-                 </div>
-               </div>
-               <textarea v-model="textArea" placeholder="Insert your words here" class="form-control" rows="18"></textarea>
-               <label v-if="error" class="text-danger">
-                 {{ errorMessage }}
-               </label>
-            </div>
-            <button :disabled="loading" v-on:click="update()" class="btn btn-warning btn-lg fullwidth">
+            <wordbank
+              ref="wordbank"
+              :words="words"
+              :color="color"
+              @wordsChange="onWordsChange"
+              @colorChange="onColorChange"
+            />
+            <button :disabled="loading" v-on:click="update()" class="mt-4 btn btn-warning btn-lg fullwidth">
               <icon v-show="loading" name="circle-o-notch" spin></icon>
               Update
             </button>
@@ -62,32 +55,19 @@
 </template>
 
 <script>
-// import customAxios from '@/libraries/customAxios'
 import { ORIGIN_URL } from '@/libraries/variables'
 import { roomValidator } from '@/libraries/util'
 import { mapGetters } from 'vuex'
 import customAxios from '@/libraries/customAxios'
+import Wordbank from '@/components/Wordbank'
+
 export default {
   props: ['id'],
-  async mounted () {
-    try {
-      if (!this.admins.map((admin) => admin.id).includes(this.id)) {
-        this.$router.replace({name: 'Auth', query: {id: this.id, target: 'Dashboard'}})
-        return
-      }
-      this.password = this.admins.find((admin) => admin.id === this.id).password
-      const result = await roomValidator.validate({
-        id: this.id,
-        password: this.password
-      })
-      this.textArea = result.room.wordBank.join('\n')
-    } catch (e) {
-      this.$router.replace({name: '404'})
-    }
-  },
+  components: { Wordbank },
   data () {
     return {
-      textArea: '',
+      words: [],
+      color: '#000',
       password: '',
       showConfig: false,
       remoteURL: `${ORIGIN_URL}/remote/${this.id}`,
@@ -98,9 +78,39 @@ export default {
       loading: false
     }
   },
+  async mounted () {
+    try {
+      if (!this.admins.map((admin) => admin.id).includes(this.id)) {
+        this.$router.replace({
+          name: 'Auth',
+          query: {
+            id: this.id,
+            target: 'Dashboard'
+          }
+        })
+        return
+      }
+      this.password = this.admins.find((admin) => admin.id === this.id).password
+      const result = await roomValidator.validate({
+        id: this.id,
+        password: this.password
+      })
+      this.color = result.room.color
+      this.words = result.room.wordBank
+      this.$refs.wordbank.forceUpdate(this.words)
+    } catch (e) {
+      this.$router.replace({name: '404'})
+    }
+  },
   methods: {
     config () {
       this.showConfig = !this.showConfig
+    },
+    onWordsChange (words) {
+      this.words = words
+    },
+    onColorChange (color) {
+      this.color = color
     },
     async update () {
       this.loading = true
@@ -108,15 +118,17 @@ export default {
         const result = await customAxios.post('/update', {
           id: this.id,
           password: this.password,
-          wordBank: this.wordBank
+          wordBank: this.words,
+          color: this.color
         })
-        this.textArea = result.data.wordBank.join('\n')
+        this.color = result.data.color
+        this.words = result.data.wordBank
+        this.$refs.wordbank.forceUpdate(this.words)
         this.success = true
         this.error = false
       } catch (e) {
         this.error = true
         this.success = false
-        console.log(e.response.data)
         this.errorMessage = e.response.data
       } finally {
         this.loading = false
@@ -126,12 +138,7 @@ export default {
   computed: {
     ...mapGetters([
       'admins'
-    ]),
-    wordBank () {
-      return this.textArea.split('\n').filter((word) => {
-        return word.trim() !== ''
-      })
-    }
+    ])
   }
 }
 </script>
