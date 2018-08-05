@@ -17,7 +17,7 @@
         </div>
         <div class="form-group">
           <label>Remote password:</label>
-          <input v-model="password" class="form-control" placeholder="Password" autocomplete="off" type="password"></input>
+          <input v-model="password" class="form-control password" placeholder="Password" autocomplete="off"></input>
           <span class="form-text text-muted">
             Remote requires password in order to control the game.
           </span>

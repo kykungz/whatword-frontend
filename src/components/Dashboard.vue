@@ -14,10 +14,10 @@
         </div>
         <h5>
           Remote URL:
+        </h5>
           <router-link :to="{ name: 'Remote', params: { id }}">
             {{ remoteURL }}
           </router-link>
-        </h5>
         <h5>
           Play URL:
           <router-link :to="{ name: 'Play', params: { id }}">

@@ -35,4 +35,8 @@ export default {
 .fullwidth {
   width: 100%;
 }
+
+.password {
+  -webkit-text-security: disc;
+}
 </style>
