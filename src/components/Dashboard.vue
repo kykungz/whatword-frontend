@@ -52,7 +52,7 @@
               Update
             </button>
             <label v-if="success" class="text-success">
-              Game updated! You must restart your game before the new setting will take effect.
+              Game updated! You must restart your game before the new setting takes effect.
             </label>
           </div>
         </transition>
