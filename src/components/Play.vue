@@ -1,5 +1,5 @@
 <template lang="html">
-  <div id="play">
+  <div id="play" :style="{ background: state.color }">
     <h1 class="display-4 fixed-top text-center mt-4">
       <b>Score: {{ state.score }}</b>
     </h1>
