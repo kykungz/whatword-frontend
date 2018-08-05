@@ -1,23 +1,13 @@
 <template lang="html">
-  <div id="play">
-    <h1 class="display-4 fixed-top text-center mt-4">
-      <b>Score: {{ state.score }}</b>
-    </h1>
+  <div id="scoreboard" :style="`background: ${state.bg}`">
     <div class="d-flex justify-content-center align-items-center h-100 w-100">
       <div class="custom-border">
-        <h1 class="word">
-          <div v-if="state.currentWord === undefined" class="hidden-word">
-            &nbsp;
-          </div>
-          <div v-else>
-            {{ state.currentWord }}
-          </div>
-        </h1>
+        <div class="score-text">Score:</div>
+        <div class="score">{{ state.score }}</div>
       </div>
     </div>
   </div>
 </template>
-
 <script>
 import * as io from 'socket.io-client'
 import { ORIGIN_API_URL } from '@/libraries/variables'
@@ -58,28 +48,27 @@ export default {
 </script>
 
 <style scoped>
-#play {
+#scoreboard {
   height: 100vh;
-  background-color: #ff9b86;
+  background-color: #2e2e2e;
 }
 
-.word {
-  font-size: 10vw;
-  margin-top: 0.3em;
+.score-text {
+  margin-top: 60px;
+  font-size: 30px;
 }
 
-.hidden-word {
-  margin: auto;
-  margin-top: -0.2em;
-  background-color: black;
-  width: 95%;
-  height: 100%;
+.score {
+  font-weight: bold;
+  font-size: 180px;
 }
 
 .custom-border {
-  margin: 2em;
-  width: 100%;
-  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 0 2em;
   background-color: white;
   border: 4px solid black;
   border-radius: 60px;

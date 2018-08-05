@@ -15,9 +15,9 @@
             Play
           </button>
           <div class="d-flex admin">
-            <button :disabled="loading" @click="redirect('Remote')" class="w-50 btn btn-danger btn-lg">
+            <button :disabled="loading" @click="redirect('Scoreboard')" class="w-50 btn btn-danger btn-lg">
               <icon v-show="loading" name="circle-o-notch" spin />
-              Remote
+              Scoreboard
             </button>
             <button :disabled="loading" @click="redirect('Dashboard')" class="w-50 btn btn-dark btn-lg">
               <icon v-show="loading" name="circle-o-notch" spin />

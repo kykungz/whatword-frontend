@@ -4,6 +4,7 @@ import Home from '@/components/Home'
 import Play from '@/components/Play'
 import Create from '@/components/Create'
 import Dashboard from '@/components/Dashboard'
+import Scoreboard from '@/components/Scoreboard'
 import Remote from '@/components/Remote'
 import Auth from '@/components/Auth'
 
@@ -31,6 +32,12 @@ export default new Router({
       path: '/dashboard/:id',
       name: 'Dashboard',
       component: Dashboard,
+      props: true
+    },
+    {
+      path: '/scoreboard/:id',
+      name: 'Scoreboard',
+      component: Scoreboard,
       props: true
     },
     {
