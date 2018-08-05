@@ -1,16 +1,18 @@
 <template lang="html">
   <div id="play">
-    <div class="container-fluid">
-      <div class="text-center">
-        <h1>Score: {{ state.score }}</h1>
-        <div class="container-fluid custom-border">
-          <h1 class="word">
-            <div v-show="state.currentWord === undefined" class="hidden-word">
-              &nbsp;
-            </div>
+    <h1 class="display-4 fixed-top text-center mt-4">
+      <b>Score: {{ state.score }}</b>
+    </h1>
+    <div class="d-flex justify-content-center align-items-center h-100 w-100">
+      <div class="custom-border">
+        <h1 class="word">
+          <div v-if="state.currentWord === undefined" class="hidden-word">
+            &nbsp;
+          </div>
+          <div v-else>
             {{ state.currentWord }}
-          </h1>
-        </div>
+          </div>
+        </h1>
       </div>
     </div>
   </div>
@@ -57,7 +59,6 @@ export default {
 
 <style scoped>
 #play {
-  padding-top: 60px;
   height: 100vh;
   background-color: #ff9b86;
 }
@@ -68,14 +69,18 @@ export default {
 }
 
 .hidden-word {
+  margin: auto;
   margin-top: -0.2em;
   background-color: black;
-  width: 100%;
+  width: 95%;
   height: 100%;
 }
 
 .custom-border {
-  margin-top: 20vh;
+  word-wrap: wrap;
+  margin: 2em;
+  width: 100%;
+  text-align: center;
   background-color: white;
   border: 4px solid black;
   border-radius: 60px;
