@@ -19,6 +19,7 @@
 <script>
 import { roomValidator } from '@/libraries/util'
 import { mapActions } from 'vuex'
+
 export default {
   async mounted () {
     try {

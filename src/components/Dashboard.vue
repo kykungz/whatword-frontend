@@ -55,7 +55,7 @@
 </template>
 
 <script>
-import { ORIGIN_URL } from '@/libraries/variables'
+import config from '@/config'
 import { roomValidator } from '@/libraries/util'
 import { mapGetters } from 'vuex'
 import customAxios from '@/libraries/customAxios'
@@ -70,8 +70,8 @@ export default {
       color: '#000',
       password: '',
       showConfig: false,
-      remoteURL: `${ORIGIN_URL}/remote/${this.id}`,
-      playURL: `${ORIGIN_URL}/play/${this.id}`,
+      remoteURL: `${config.ORIGIN_URL}/remote/${this.id}`,
+      playURL: `${config.ORIGIN_URL}/play/${this.id}`,
       error: false,
       errorMessage: '',
       success: false,

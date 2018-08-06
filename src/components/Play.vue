@@ -20,8 +20,9 @@
 
 <script>
 import * as io from 'socket.io-client'
-import { ORIGIN_API_URL } from '@/libraries/variables'
+import config from '@/config'
 import { roomValidator } from '@/libraries/util'
+
 export default {
   props: ['id'],
   async mounted () {
@@ -30,7 +31,7 @@ export default {
         id: this.id
       })
       this.state = result
-      this.socket = io(ORIGIN_API_URL)
+      this.socket = io(config.ORIGIN_API_URL)
       this.socket.emit('join', {id: this.id})
       this.socket.on('state', state => {
         // FIXME: Fix this to use socket-io's namespace

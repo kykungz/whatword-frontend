@@ -48,6 +48,7 @@
 
 <script>
 import { roomValidator } from '@/libraries/util'
+
 export default {
   name: 'hello',
   data () {
