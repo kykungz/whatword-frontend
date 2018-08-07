@@ -4,6 +4,7 @@ import store from '@/store'
 import Home from '@/views/Home'
 import Play from '@/views/Play'
 import Create from '@/views/Create'
+import Dashboard from '@/views/Dashboard'
 
 Vue.use(Router)
 
@@ -24,6 +25,12 @@ const router = new Router({
       path: '/create',
       name: 'create',
       component: Create,
+    },
+    {
+      path: '/dashboard/:id',
+      name: 'dashboard',
+      component: Dashboard,
+      props: true,
     },
     // {
     //   path: '/about',

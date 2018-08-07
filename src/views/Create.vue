@@ -2,12 +2,7 @@
   <div id="create">
     <div class="container">
       <div class="content">
-        <Wordbank
-          :words="words"
-          :color="color"
-          @wordsChange="onWordsChange"
-          @colorChange="onColorChange"
-        />
+        <Wordbank :words="words" :color="color" @wordsChange="onWordsChange" @colorChange="onColorChange" />
         <div class="form-group mt-2">
           <label>Remote password:</label>
           <input v-model="password" class="form-control password" placeholder="Password" />
@@ -18,11 +13,7 @@
         <div v-if="error" class="alert alert-warning" role="alert">
           {{ error }}
         </div>
-        <button
-          class="btn btn-warning btn-lg btn-block"
-          v-on:click="submit()"
-          :disabled="isDisabled()"
-        >
+        <button class="btn btn-warning btn-lg btn-block" v-on:click="submit()" :disabled="isDisabled()">
           <icon v-show="loading" name="circle-notch" spin></icon>
           {{ this.loading ? 'Creating...' : 'Create' }}
         </button>
@@ -48,7 +39,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions(['pushAdmin']),
+    ...mapActions(['saveRoom']),
     onWordsChange(words) {
       this.words = words
     },
@@ -66,7 +57,7 @@ export default {
           color: this.color,
           password: this.password,
         })
-        this.pushAdmin({ id, password: this.password })
+        this.saveRoom({ id, password: this.password })
         this.$router.push({ name: 'dashboard', params: { id } })
       } catch (err) {
         this.error = err.message || err.response.data
