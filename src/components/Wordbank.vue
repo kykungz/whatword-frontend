@@ -16,12 +16,12 @@
         @input="onWordsChange"
       />
     </div>
-    <div class="d-flex align-items-center justify-content-between mb-2">
+    <div class="d-flex align-items-center justify-content-between">
       <h4 class="mb-0">Color:</h4>
       <div class="preview-color" :style="{ background: color }" />
     </div>
     <div class="d-flex align-items-center justify-content-between">
-      <div class="d-flex">
+      <div class="d-flex color-palette">
         <div
           v-for="tempColor in colors"
           :key="tempColor" 
@@ -31,9 +31,8 @@
         />
       </div>
       <input
-        class="ml-2 w-25 text-right form-control"
+        class="color-input ml-2 text-right form-control"
         placeholder="#000000"
-        size="4"
         :value="color"
         @input="onColorChange($event.target.value)"
       />
@@ -90,13 +89,28 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.color-palette {
+  overflow-x: auto;
+  padding: 1em 0;
+}
+
+.color-input {
+  width: 6em;
+}
+
 .color {
   width: 30px;
   height: 30px;
+  min-width: 30px;
+  min-height: 30px;
   border-radius: 4px;
   cursor: pointer;
   border: thin solid white;
   transition: all 300ms;
+}
+
+.color + .color {
+  margin-left: 0.25em;
 }
 
 .preview-color {
@@ -114,9 +128,5 @@ export default {
 .selected {
   border: thin solid #2e2e2e;
   box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.6);
-}
-
-.color + .color {
-  margin-left: 0.25em;
 }
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container mb-4">
     <div class="text-left content form-group">
       <label>Enter Game ID:</label>
       <input v-model="roomId" :class="{'is-invalid': error}" class="mb-2 text-center form-control form-control-lg" placeholder="GAME ID">
@@ -36,10 +36,12 @@
       <router-link :to="{ name: 'home' }">
         <big>How to play?</big>
       </router-link>
-      <big>
+      <div>
         Made by
-        <a href="https://github.com/kykungz">Kongpon C.</a>
-      </big>
+        <big>
+          <a href="https://github.com/kykungz">Kongpon C.</a>
+        </big>
+      </div>
     </div>
   </div>
 </template>
@@ -72,6 +74,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.btn {
+  white-space: normal;
+}
 .options {
   > * + * {
     margin-top: 4px;
