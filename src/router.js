@@ -1,12 +1,13 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import store from '@/store'
 import Home from '@/views/Home'
 import Play from '@/views/Play'
 import Create from '@/views/Create'
 
 Vue.use(Router)
 
-export default new Router({
+const router = new Router({
   routes: [
     {
       path: '/',
@@ -35,3 +36,9 @@ export default new Router({
     // },
   ],
 })
+
+router.afterEach(() => {
+  store.dispatch('setLoading', false)
+})
+
+export default router

@@ -1,7 +1,10 @@
 <template>
   <div id="app">
     <transition name="fade" mode="out-in" appear>
-      <div v-if="shouldShow()">
+      <PageLoader v-show="loading" />
+    </transition>
+    <transition name="fade" mode="out-in" appear>
+      <div v-show="shouldShow()">
         <GithubCorner />
         <div class="header container">
           <h1 class="text-center">What Word is it ?</h1>
@@ -17,9 +20,14 @@
 
 <script>
 import GithubCorner from '@/components/GithubCorner'
+import PageLoader from '@/components/PageLoader'
+import { mapGetters } from 'vuex'
 
 export default {
-  components: { GithubCorner },
+  components: { GithubCorner, PageLoader },
+  computed: {
+    ...mapGetters(['loading']),
+  },
   methods: {
     shouldShow() {
       return ['home', 'dashboard', 'create'].includes(this.$route.name)
