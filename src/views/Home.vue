@@ -62,7 +62,7 @@ export default {
         await GameApi.getRoomInfo({ id: this.roomId })
         this.$router.push({ name, params: { id: this.roomId } })
       } catch (err) {
-        this.error = err.message || err.response.data
+        this.error = (err.response && err.response.data) || err.message
       } finally {
         this.loading = false
       }

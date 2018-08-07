@@ -15,7 +15,12 @@ class GameApi {
   }
 
   static getRoomInfo({ id, password }) {
-    return axiosInstance.get('/room', { id, password })
+    return axiosInstance.get('/room', {
+      params: {
+        id,
+        password,
+      },
+    })
   }
 }
 

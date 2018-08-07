@@ -15,7 +15,7 @@ export default new Router({
     },
     {
       path: '/play/:id',
-      name: 'Play',
+      name: 'play',
       component: Play,
       props: true,
     },
