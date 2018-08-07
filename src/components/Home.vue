@@ -1,8 +1,6 @@
 <template>
   <div class="container">
     <div id="home">
-      <h1>What Word is it ?</h1>
-      <hr>
       <div class="text-left content form-group">
         <label>Enter Game ID:</label>
         <input v-model="roomId" :class="{'is-invalid': error}" class="mb-2 text-center form-control form-control-lg" placeholder="GAME ID" required>
@@ -38,10 +36,13 @@
         </router-link>
       </div>
     </div>
-    <div style="margin-top:20px" class="content text-right">
+    <div class="mt-4 content d-flex justify-content-between align-items-center">
       <router-link :to="{ name: 'Home' }">
         <big>How to play?</big>
       </router-link>
+      <big>
+        Made by <a href="https://github.com/kykungz">@kykungz</a>
+      </big>
     </div>
   </div>
 </template>
@@ -64,8 +65,8 @@ export default {
     async redirect (name) {
       this.loading = true
       try {
-        await roomValidator.validate({id: this.roomId})
-        this.$router.push({name, params: {id: this.roomId}})
+        await roomValidator.validate({ id: this.roomId })
+        this.$router.push({ name, params: { id: this.roomId } })
       } catch (err) {
         this.error = true
         this.errorMessage = err.response.data
@@ -79,11 +80,6 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-#home {
-  text-align: center;
-  margin-top: 60px;
-}
-
 .options > * + * {
   margin-top: 4px;
 }

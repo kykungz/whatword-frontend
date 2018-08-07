@@ -1,8 +1,6 @@
 <template lang="html">
   <div id="dashboard">
     <div class="container">
-      <h1 class="text-center">What Word is it ?</h1>
-      <hr>
       <div class="content">
         <div class="text-center">
           <h2>Your game is ready</h2>
@@ -145,7 +143,6 @@ export default {
 
 <style scoped>
 #dashboard {
-  margin-top: 60px;
   margin-bottom: 60px;
 }
 </style>

@@ -1,14 +1,31 @@
 <template>
   <div id="app">
     <transition name="fade" mode="out-in" appear>
-      <router-view></router-view>
+      <div v-if="shouldShow()">
+        <github-corner />
+        <div class="header container">
+          <h1 class="text-center">What Word is it ?</h1>
+          <hr>
+        </div>
+      </div>
+    </transition>
+    <transition name="fade" mode="out-in" appear>
+      <router-view />
     </transition>
   </div>
 </template>
 
 <script>
+import GithubCorner from '@/components/GithubCorner'
+
 export default {
-  name: 'app'
+  name: 'app',
+  components: { GithubCorner },
+  methods: {
+    shouldShow () {
+      return ['Home', 'Dashboard', 'Create'].includes(this.$route.name)
+    }
+  }
 }
 </script>
 
@@ -20,16 +37,21 @@ export default {
   color: #2c3e50;
 }
 
+.header {
+  text-align: center;
+  margin-top: 60px;
+}
+
 .content {
   max-width: 500px;
   margin: auto;
 }
 .fade-enter-active, .fade-leave-active {
-  transition: opacity 0.3s
+  transition: opacity 0.3s;
 }
 
 .fade-enter, .fade-leave-active {
-  opacity: 0
+  opacity: 0;
 }
 
 .fullwidth {

@@ -1,8 +1,6 @@
 <template lang="html">
   <div id="create">
     <div class="container">
-      <h1 class="text-center">What Word is it ?</h1>
-      <hr>
       <div class="content">
         <wordbank
           :words="words"
@@ -88,6 +86,5 @@ export default {
 <style scoped>
 #create {
   margin-bottom: 60px;
-  margin-top: 60px;
 }
 </style>
