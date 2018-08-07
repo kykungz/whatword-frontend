@@ -14,7 +14,7 @@
           <router-link :to="{ name: 'remote', params: { id }}">
             {{ remoteURL }}
           </router-link>
-          <!-- <qr-code :text="remoteURL" class="mx-auto mt-3 mb-1" style="width: fit-content" /> -->
+          <qr-code :text="remoteURL" class="mx-auto mt-3 mb-1" style="width: fit-content" />
           <div class="text-center"><small><i>Remote Control URL</i></small></div>
         </h5>
         <h5 class="mt-3">
