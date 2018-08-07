@@ -9,7 +9,12 @@
           <h4>{{ words.length }} Words</h4>
         </div>
       </div>
-      <textarea :value="textArea" @input="onWordsChange" placeholder="Insert your words here" class="form-control" rows="18" />
+      <textarea
+        class="form-control" rows="18"
+        placeholder="Insert your words here"
+        :value="textArea"
+        @input="onWordsChange"
+      />
     </div>
     <div class="d-flex align-items-center justify-content-between mb-2">
       <h4 class="mb-0">Color:</h4>
