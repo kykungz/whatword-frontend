@@ -57,6 +57,10 @@ export default {
   margin: auto;
 }
 
+.password {
+  -webkit-text-security: disc;
+}
+
 .fa-icon {
   vertical-align: unset;
   margin-right: 4px;
