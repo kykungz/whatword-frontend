@@ -3,22 +3,25 @@
     <div id="home">
       <div class="text-left content form-group">
         <label>Enter Game ID:</label>
-        <input v-model="roomId" :class="{'is-invalid': error}" class="mb-2 text-center form-control form-control-lg" placeholder="GAME ID" required>
-        <label v-if="error" class="text-danger">
+        <input v-model="roomId" :class="{'is-invalid': error}" class="mb-2 text-center form-control form-control-lg" placeholder="GAME ID">
+        <label v-show="error" class="text-danger">
           {{ error }}
         </label>
         <div class="options">
           <button :disabled="loading" @click="redirect('Play')" class="btn btn-primary btn-lg btn-block">
-            <icon v-show="loading" name="circle-notch" spin />
+            <icon v-if="loading" name="circle-notch" spin />
+            <icon v-else name="rocket" />
             Play
           </button>
           <div class="d-flex admin">
             <button :disabled="loading" @click="redirect('Scoreboard')" class="w-50 btn btn-danger btn-lg">
-              <icon v-show="loading" name="circle-notch" spin />
+              <icon v-if="loading" name="circle-notch" spin />
+              <icon v-else name="star" />
               Scoreboard
             </button>
             <button :disabled="loading" @click="redirect('Dashboard')" class="w-50 btn btn-dark btn-lg">
-              <icon v-show="loading" name="circle-notch" spin />
+              <icon v-if="loading" name="circle-notch" spin />
+              <icon v-else name="sliders-h" />
               Dashboard
             </button>
           </div>
@@ -29,7 +32,8 @@
       <hr>
       <div class="content">
         <router-link :to="{ name: 'create' }" :disabled="loading" class="btn btn-warning btn-lg btn-block">
-          <icon v-show="loading" name="circle-notch" spin />
+          <icon v-if="loading" name="circle-notch" spin />
+          <icon v-else name="pencil-alt" />
           Create New Game
         </router-link >
       </div>
@@ -49,7 +53,6 @@
 import GameApi from '@/lib/GameApi'
 
 export default {
-  name: 'hello',
   data() {
     return {
       roomId: '',
@@ -62,10 +65,9 @@ export default {
       try {
         this.loading = true
         await GameApi.getRoomInfo({ id: this.roomId })
-        console.log('hi')
         this.$router.push({ name, params: { id: this.roomId } })
-      } catch (error) {
-        this.error = error && error.response && error.response.data
+      } catch (err) {
+        this.error = err.message || err.response.data
       } finally {
         this.loading = false
       }

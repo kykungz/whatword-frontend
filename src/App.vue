@@ -16,7 +16,9 @@
   max-width: 500px;
   margin: auto;
 }
+
 .fa-icon {
   vertical-align: unset;
+  margin-right: 4px;
 }
 </style>
