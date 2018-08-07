@@ -41,7 +41,7 @@
         <big>How to play?</big>
       </router-link>
       <big>
-        Made by <a href="https://github.com/kykungz">@kykungz</a>
+        Made by <a href="https://github.com/kykungz">Kongpon C.</a>
       </big>
     </div>
   </div>
