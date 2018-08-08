@@ -7,29 +7,35 @@
           <div><h2>Left: {{ this.state.remaining }}</h2></div>
         </div>
         <div class="d-flex justify-content-center align-items-center word">
-          <div v-if="this.isHiding" class="badge badge-pill badge-danger">
+          <div v-if="this.isOver" class="badge badge-pill badge-danger">
+            Game Over
+          </div>
+          <div v-else-if="this.isHiding" class="badge badge-pill badge-danger">
             Hiding
           </div>
-          <div v-else>{{ this.state.currentWord }}</div>
+          <div v-else>
+            {{ this.state.currentWord }}
+          </div>
         </div>
       </div>
       <button
         :disabled="isHiding"
         @click="remote('correct')"
-        class="remote-button btn btn-success text-center"
+        :class="['remote-button btn text-center', isHiding ? 'btn-dark' : 'btn-success']"
       >
         <h1><icon name="check-circle" scale="2" /> Correct</h1>
       </button>
       <button
         :disabled="isHiding"
         @click="remote('skip')"
-        class="remote-button btn btn-info text-center"
+        :class="['remote-button btn text-center', isHiding ? 'btn-dark' : 'btn-info']"
       >
         <h1><icon name="forward" scale="2" /> Skip</h1>
       </button>
       <button
+        :disabled="isOver"
         @click="remote(isHiding ? 'show' : 'hide')"
-        :class="[isHiding ? '' : 'btn-dark', 'remote-button btn text-center']"
+        :class="['remote-button btn text-center', isOver ? 'btn-dark' : (isHiding ? 'btn-warning' : 'btn-dark')]"
       >
         <h1 v-if="isHiding"><icon name="eye" scale="2" /> Show</h1>
         <h1 v-else><icon name="eye-slash" scale="2" /> Hide</h1>
@@ -61,6 +67,9 @@ export default {
     ...mapGetters(['loading', 'rooms']),
     isHiding() {
       return this.state.currentWord === undefined
+    },
+    isOver() {
+      return this.state.currentWord === undefined && this.state.remaining === 0
     },
   },
   async mounted() {
