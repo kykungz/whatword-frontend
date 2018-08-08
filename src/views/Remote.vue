@@ -18,24 +18,24 @@
         @click="remote('correct')"
         class="remote-button btn btn-success text-center"
       >
-        <h1>Correct</h1>
+        <h1><icon name="check-circle" scale="2" /> Correct</h1>
       </button>
       <button
         :disabled="isHiding"
         @click="remote('skip')"
         class="remote-button btn btn-info text-center"
       >
-        <h1>Skip</h1>
+        <h1><icon name="forward" scale="2" /> Skip</h1>
       </button>
       <button
         @click="remote(isHiding ? 'show' : 'hide')"
-        :class="[isHiding ? 'btn-light' : 'btn-dark', 'remote-button btn text-center']"
+        :class="[isHiding ? '' : 'btn-dark', 'remote-button btn text-center']"
       >
-        <h1 v-if="isHiding">Show</h1>
-        <h1 v-else>Hide</h1>
+        <h1 v-if="isHiding"><icon name="eye" scale="2" /> Show</h1>
+        <h1 v-else><icon name="eye-slash" scale="2" /> Hide</h1>
       </button>
-      <button @click="remote('restart')" class="remote-button btn btn-danger text-center">
-        <h1>Restart</h1>
+      <button @click="restart()" class="remote-button btn btn-danger text-center">
+        <h1><icon name="sync-alt" scale="2" /> Restart</h1>
       </button>
     </div>
   </div>
@@ -110,6 +110,12 @@ export default {
         this.$router.push({ name: 'home' })
       }
     },
+    restart() {
+      const confirm = window.confirm('Are you sure to restart the game?')
+      if (confirm) {
+        this.remote('restart')
+      }
+    },
   },
 }
 </script>
@@ -117,6 +123,10 @@ export default {
 <style scoped>
 #remote {
   height: 100vh;
+}
+
+h1 {
+  margin: 0;
 }
 
 .remote-content {
