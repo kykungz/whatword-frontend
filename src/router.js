@@ -5,6 +5,7 @@ import Home from '@/views/Home'
 import Play from '@/views/Play'
 import Create from '@/views/Create'
 import Dashboard from '@/views/Dashboard'
+import Auth from '@/views/Auth'
 
 Vue.use(Router)
 
@@ -31,6 +32,11 @@ const router = new Router({
       name: 'dashboard',
       component: Dashboard,
       props: true,
+    },
+    {
+      path: '/auth',
+      name: 'auth',
+      component: Auth,
     },
     // {
     //   path: '/about',

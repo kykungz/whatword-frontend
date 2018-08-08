@@ -4,10 +4,12 @@
   </div>
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
 .full {
-  z-index: 9999;
   position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
   display: flex;
   justify-content: center;
   align-items: center;
