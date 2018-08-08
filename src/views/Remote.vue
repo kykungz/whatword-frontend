@@ -1,4 +1,4 @@
-<template lang="html">
+<template>
   <div id="remote">
     <div class="remote-content">
       <div class="remote-status alert-info text-center">
@@ -47,7 +47,7 @@
   </div>
 </template>
 <script>
-import * as io from 'socket.io-client'
+import io from 'socket.io-client'
 import config from '@/config'
 import GameApi from '@/lib/GameApi'
 import { mapGetters, mapActions } from 'vuex'

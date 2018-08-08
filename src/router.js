@@ -5,6 +5,7 @@ import Home from '@/views/Home'
 import Play from '@/views/Play'
 import Create from '@/views/Create'
 import Dashboard from '@/views/Dashboard'
+import Scoreboard from '@/views/Scoreboard'
 import Auth from '@/views/Auth'
 import Remote from '@/views/Remote'
 
@@ -35,6 +36,12 @@ const router = new Router({
       props: true,
     },
     {
+      path: '/scoreboard/:id',
+      name: 'scoreboard',
+      component: Scoreboard,
+      props: true,
+    },
+    {
       path: '/auth',
       name: 'auth',
       component: Auth,
@@ -59,6 +66,7 @@ const router = new Router({
 
 router.afterEach(() => {
   store.dispatch('setLoading', false)
+  document.body.style.background = 'white'
 })
 
 export default router

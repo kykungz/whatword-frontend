@@ -66,7 +66,6 @@ export default {
     if (this.socket) {
       this.socket.disconnect()
     }
-    document.body.style.background = 'white'
   },
 }
 </script>
