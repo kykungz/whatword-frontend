@@ -30,7 +30,6 @@ export default {
     return {
       socket: undefined,
       state: {
-        currentWord: undefined,
         score: 0,
       },
     }

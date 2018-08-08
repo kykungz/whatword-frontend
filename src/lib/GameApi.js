@@ -22,6 +22,10 @@ class GameApi {
       },
     })
   }
+
+  static remote({ id, password, action }) {
+    return axiosInstance.post('/remote', { id, password, action })
+  }
 }
 
 export default GameApi
