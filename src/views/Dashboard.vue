@@ -77,16 +77,6 @@ export default {
   },
   async mounted() {
     try {
-      if (!this.rooms[this.id]) {
-        return this.$router.replace({
-          name: 'auth',
-          query: {
-            id: this.id,
-            redirect: 'dashboard',
-          },
-        })
-      }
-
       const { data: result } = await GameApi.getRoomInfo({
         id: this.id,
         password: this.rooms[this.id],

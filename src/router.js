@@ -6,6 +6,7 @@ import Play from '@/views/Play'
 import Create from '@/views/Create'
 import Dashboard from '@/views/Dashboard'
 import Auth from '@/views/Auth'
+import Remote from '@/views/Remote'
 
 Vue.use(Router)
 
@@ -37,6 +38,12 @@ const router = new Router({
       path: '/auth',
       name: 'auth',
       component: Auth,
+    },
+    {
+      path: '/remote/:id',
+      name: 'remote',
+      component: Remote,
+      props: true,
     },
     // {
     //   path: '/about',
