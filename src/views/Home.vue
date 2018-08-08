@@ -27,8 +27,12 @@
     <h3 class="text-center">OR</h3>
     <hr>
     <div class="content">
-      <router-link :to="{ name: 'create' }" class="btn btn-warning btn-lg btn-block">
-        <icon name="pencil-alt" /> Create New Game
+      <router-link
+        :to="{ name: 'create' }"
+        :class="['btn btn-warning btn-lg btn-block', { disabled: loading }]"
+      >
+        <icon v-if="loading" name="circle-notch" spin />
+        <icon v-else name="pencil-alt" /> Create New Game
       </router-link>
     </div>
     <div class="mt-4 content d-flex justify-content-between align-items-center">
