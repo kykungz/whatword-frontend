@@ -44,11 +44,8 @@ export default {
         if (this.loading) {
           this.setLoading(false)
         }
-        // FIXME: Fix this to use socket-io's namespace
-        if (this.id === state.id) {
-          this.state = state
-          document.body.style.background = state.color
-        }
+        this.state = state
+        document.body.style.background = state.color
       })
     } catch (e) {
       console.log(e)
