@@ -3,12 +3,8 @@
     <div class="remote-content">
       <div class="remote-status alert-info text-center">
         <div class="d-flex justify-content-around text-danger mt-3 w-100">
-          <div>
-            <h2>Score: {{ this.state.score }}</h2>
-          </div>
-          <div>
-            <h2>Left: {{ this.state.remaining }}</h2>
-          </div>
+          <h2>Score: {{ this.state.score }}</h2>
+          <h2>Left: {{ this.state.remaining }}</h2>
         </div>
         <div class="d-flex justify-content-center align-items-center word">
           <div v-if="this.isOver" class="badge badge-pill badge-danger">
@@ -22,23 +18,33 @@
           </div>
         </div>
       </div>
-      <button :disabled="isHiding" @click="remote('correct')" :class="['remote-button btn text-center', isHiding ? 'btn-dark' : 'btn-success']">
-        <h1>
-          <icon name="check-circle" scale="2" /> Correct</h1>
+      <button
+        :disabled="isHiding"
+        @click="remote('correct')"
+        :class="['remote-button btn text-center', isHiding ? 'btn-dark' : 'btn-success']"
+      >
+        <h1><icon name="check-circle" scale="2" /> Correct</h1>
       </button>
-      <button :disabled="isHiding" @click="remote('skip')" :class="['remote-button btn text-center', isHiding ? 'btn-dark' : 'btn-info']">
-        <h1>
-          <icon name="forward" scale="2" /> Skip</h1>
+      <button
+        :disabled="isHiding || isLast"
+        @click="remote('skip')"
+        :class="['remote-button btn text-center', skipBtnColor]"
+      >
+        <h1><icon name="forward" scale="2" /> Skip</h1>
       </button>
-      <button :disabled="isOver" @click="remote(isHiding ? 'show' : 'hide')" :class="['remote-button btn text-center', isOver ? 'btn-dark' : (isHiding ? 'btn-warning' : 'btn-dark')]">
-        <h1 v-if="isHiding">
-          <icon name="eye" scale="2" /> Show</h1>
-        <h1 v-else>
-          <icon name="eye-slash" scale="2" /> Hide</h1>
+      <button
+        :disabled="isOver || isLast"
+        @click="remote(isHiding ? 'show' : 'hide')"
+        :class="['remote-button btn text-center', visibilityBtnColor]"
+      >
+        <h1 v-if="isHiding"><icon name="eye" scale="2" /> Show</h1>
+        <h1 v-else><icon name="eye-slash" scale="2" /> Hide</h1>
       </button>
-      <button @click="restart()" class="remote-button btn btn-danger text-center">
-        <h1>
-          <icon name="sync-alt" scale="2" /> Restart</h1>
+      <button
+        @click="restart()"
+        class="remote-button btn btn-danger text-center"
+      >
+        <h1><icon name="sync-alt" scale="2" /> Restart</h1>
       </button>
     </div>
   </div>
@@ -67,6 +73,21 @@ export default {
     },
     isOver() {
       return this.state.currentWord === undefined && this.state.remaining === 0
+    },
+    isLast() {
+      return this.state.remaining === 0
+    },
+    visibilityBtnColor() {
+      if (this.isOver || this.isLast) {
+        return 'btn-dark' // disabled
+      } else if (this.isHiding) {
+        return 'btn-warning' // show
+      } else {
+        return 'btn-dark' // hide
+      }
+    },
+    skipBtnColor() {
+      return this.isHiding || this.isLast ? 'btn-dark' : 'btn-info'
     },
   },
   async mounted() {
