@@ -131,7 +131,7 @@ export default {
           action,
         })
       } catch (error) {
-        this.$router.push({ name: 'home' })
+        // this.$router.push({ name: 'home' })
       }
     },
     restart() {

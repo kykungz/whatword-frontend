@@ -1,12 +1,13 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import Cookies from 'js-cookie'
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
     loading: false,
-    rooms: {},
+    rooms: Cookies.getJSON('rooms') || {},
   },
   getters: {
     rooms: state => state.rooms,
@@ -15,6 +16,7 @@ export default new Vuex.Store({
   mutations: {
     SAVE_ROOM(state, { id, password }) {
       state.rooms[id] = password
+      Cookies.set('rooms', state.rooms, { expires: 1 })
     },
     SET_LOADING(state, loading) {
       state.loading = loading
