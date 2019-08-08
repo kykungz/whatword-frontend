@@ -124,15 +124,19 @@ export default {
   methods: {
     ...mapActions(['setLoading']),
     async remote(action) {
-      try {
-        await GameApi.remote({
-          id: this.id,
-          password: this.rooms[this.id],
-          action,
-        })
-      } catch (error) {
-        // this.$router.push({ name: 'home' })
-      }
+      // try {
+      //   await GameApi.remote({
+      //     id: this.id,
+      //     password: this.rooms[this.id],
+      //     action,
+      //   })
+      // } catch (error) {
+      //   // this.$router.push({ name: 'home' })
+      // }
+      this.socket.emit('remote', {
+        id: this.id,
+        action,
+      })
     },
     restart() {
       const confirm = window.confirm('Are you sure to restart the game?')
