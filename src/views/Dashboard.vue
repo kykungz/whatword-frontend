@@ -23,6 +23,12 @@
             {{ playURL }}
           </router-link>
         </h5>
+        <h5 class="mt-3">
+          Score URL:
+          <router-link :to="{ name: 'scoreboard', params: { id }}">
+            {{ scoreboardURL }}
+          </router-link>
+        </h5>
         <hr>
         <div class="text-right">
           <a @click="toggleConfig()" href="javascript:void(0)">
@@ -68,6 +74,7 @@ export default {
       showConfig: false,
       remoteURL: `${config.ORIGIN_URL}/remote/${this.id}`,
       playURL: `${config.ORIGIN_URL}/play/${this.id}`,
+      scoreboardURL: `${config.ORIGIN_URL}/scoreboard/${this.id}`,
       updated: false,
       loading: false,
     }
