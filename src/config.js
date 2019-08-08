@@ -1,7 +1,8 @@
 const config = {
   production: {
     // ORIGIN_API_URL: 'https://whatword.appspot.com',
-    ORIGIN_API_URL: 'https://35.184.157.197:5000',
+    // ORIGIN_API_URL: 'https://35.184.157.197:5000',
+    ORIGIN_API_URL: 'https://whatword-api.herokuapp.com',
     ORIGIN_URL: 'https://kykungz.github.io/whatword/#',
   },
   development: {
