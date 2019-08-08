@@ -8,6 +8,7 @@ import Dashboard from '@/views/Dashboard'
 import Scoreboard from '@/views/Scoreboard'
 import Auth from '@/views/Auth'
 import Remote from '@/views/Remote'
+import Guide from '@/views/Guide'
 
 Vue.use(Router)
 
@@ -51,6 +52,11 @@ const router = new Router({
       name: 'remote',
       component: Remote,
       props: true,
+    },
+    {
+      path: '/guide',
+      name: 'guide',
+      component: Guide,
     },
     // {
     //   path: '/about',

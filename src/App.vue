@@ -30,7 +30,7 @@ export default {
   },
   methods: {
     shouldShow() {
-      return ['home', 'dashboard', 'create'].includes(this.$route.name)
+      return ['home', 'dashboard', 'create', 'guide'].includes(this.$route.name)
     },
   },
 }

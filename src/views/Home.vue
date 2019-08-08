@@ -36,7 +36,7 @@
       </router-link>
     </div>
     <div class="mt-4 content d-flex justify-content-between align-items-center">
-      <router-link :to="{ name: 'home' }">
+      <router-link :to="{ name: 'guide' }">
         <big>How to play?</big>
       </router-link>
       <div>
